@@ -93,5 +93,7 @@ dependencies {
     // Optional - Integration with RxJava
     implementation("androidx.compose.runtime:runtime-rxjava2")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
-
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.google.zxing:core:3.4.1")
+    implementation("org.json:json:20210307")
 }
