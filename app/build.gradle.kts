@@ -67,6 +67,12 @@ dependencies {
     // such as input and measurement/layout
     implementation("androidx.compose.ui:ui")
 
+    // Gson for JSON parsing
+    implementation("com.google.code.gson:gson:2.11.0")
+
+    // MongoDB Java driver
+    implementation("org.mongodb:mongodb-driver-sync:5.1.0")
+
     // Android Studio Preview support
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")
