@@ -1,5 +1,3 @@
-import org.apache.tools.ant.util.JavaEnvUtils.VERSION_1_8
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -31,75 +29,59 @@ android {
             )
         }
     }
-     composeOptions {
-            kotlinCompilerExtensionVersion = "1.5.13"
-        }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+        // Enabling core library desugaring
+        isCoreLibraryDesugaringEnabled = true
+    }
 
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.13"
     }
 
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/native-image/org.mongodb/bson/native-image.properties"
         }
     }
 }
 
 dependencies {
-
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    val composeBom = platform("androidx.compose:compose-bom:2024.05.00")
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-
-    // Choose one of the following:
-    // Material Design 3
+    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
     implementation("androidx.compose.material3:material3")
-    // or Material Design 2
     implementation("androidx.compose.material:material")
-    // or skip Material Design and build directly on top of foundational components
     implementation("androidx.compose.foundation:foundation")
-    // or only import the main APIs for the underlying toolkit systems,
-    // such as input and measurement/layout
     implementation("androidx.compose.ui:ui")
-
-    // Gson for JSON parsing
     implementation("com.google.code.gson:gson:2.11.0")
-
-    // MongoDB Java driver
-    implementation("org.mongodb:mongodb-driver-sync:5.1.0")
-
-    // Android Studio Preview support
+    implementation("org.mongodb:mongodb-driver-sync:5.1.0") {
+        exclude(group = "org.mongodb", module = "bson-record-codec")
+    }
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")
-
-    // UI Tests
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    // Optional - Included automatically by material, only add when you need
-    // the icons but not the material library (e.g. when using Material3 or a
-    // custom design system based on Foundation)
     implementation("androidx.compose.material:material-icons-core")
-    // Optional - Add full set of material icons
     implementation("androidx.compose.material:material-icons-extended")
-    // Optional - Add window size utils
     implementation("androidx.compose.material3:material3-window-size-class")
-
-    // Optional - Integration with activities
     implementation("androidx.activity:activity-compose:1.9.0")
-    // Optional - Integration with ViewModels
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-    // Optional - Integration with LiveData
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
     implementation("androidx.compose.runtime:runtime-livedata")
-    // Optional - Integration with RxJava
     implementation("androidx.compose.runtime:runtime-rxjava2")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
-    implementation("com.squareup.okhttp3:okhttp:4.9.2")
-    implementation("com.google.zxing:core:3.4.1")
-    implementation("org.json:json:20231013")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.google.zxing:core:3.5.3")
+    implementation("org.json:json:20240303")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 }
