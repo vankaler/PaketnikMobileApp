@@ -1,4 +1,3 @@
-// src/main/java/com/example/paketnikapp/apiUtil/ApiUtil.kt
 package com.example.paketnikapp.apiUtil
 
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -58,8 +57,8 @@ object ApiUtil {
         })
     }
 
-    fun register(email: String, password: String, onSuccess: (ApiResponse) -> Unit, onFailure: (Throwable) -> Unit) {
-        val call = apiService.register(RegisterRequest(email, password))
+    fun register(firstName: String, lastName: String, email: String, password: String, onSuccess: (ApiResponse) -> Unit, onFailure: (Throwable) -> Unit) {
+        val call = apiService.register(RegisterRequest(firstName, lastName, email, password))
         call.enqueue(object : retrofit2.Callback<ApiResponse> {
             override fun onResponse(call: retrofit2.Call<ApiResponse>, response: retrofit2.Response<ApiResponse>) {
                 if (response.isSuccessful) {

@@ -21,18 +21,18 @@ class RegisterActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PaketnikAppTheme {
-                RegisterScreen { email, password, confirmPassword -> performRegister(email, password, confirmPassword) }
+                RegisterScreen { firstName, lastName, email, password, confirmPassword -> performRegister(firstName, lastName, email, password, confirmPassword) }
             }
         }
     }
 
-    private fun performRegister(email: String, password: String, confirmPassword: String) {
+    private fun performRegister(firstName: String, lastName: String, email: String, password: String, confirmPassword: String) {
         if (password != confirmPassword) {
             Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             return
         }
 
-        ApiUtil.register(email, password, onSuccess = { response ->
+        ApiUtil.register(firstName, lastName, email, password, onSuccess = { response ->
             Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
             if (response.success) {
                 // Handle successful registration
@@ -44,7 +44,9 @@ class RegisterActivity : ComponentActivity() {
 }
 
 @Composable
-fun RegisterScreen(onRegisterClick: (String, String, String) -> Unit) {
+fun RegisterScreen(onRegisterClick: (String, String, String, String, String) -> Unit) {
+    var firstName by remember { mutableStateOf("") }
+    var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
@@ -56,6 +58,20 @@ fun RegisterScreen(onRegisterClick: (String, String, String) -> Unit) {
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
+        TextField(
+            value = firstName,
+            onValueChange = { firstName = it },
+            label = { Text("First Name") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        TextField(
+            value = lastName,
+            onValueChange = { lastName = it },
+            label = { Text("Last Name") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(8.dp))
         TextField(
             value = email,
             onValueChange = { email = it },
@@ -80,7 +96,7 @@ fun RegisterScreen(onRegisterClick: (String, String, String) -> Unit) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { onRegisterClick(email, password, confirmPassword) },
+            onClick = { onRegisterClick(firstName, lastName, email, password, confirmPassword) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Register")
@@ -92,6 +108,6 @@ fun RegisterScreen(onRegisterClick: (String, String, String) -> Unit) {
 @Composable
 fun RegisterScreenPreview() {
     PaketnikAppTheme {
-        RegisterScreen { _, _, _ -> }
+        RegisterScreen { _, _, _, _, _ -> }
     }
 }

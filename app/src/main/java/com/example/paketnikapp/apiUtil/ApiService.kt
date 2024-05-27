@@ -9,7 +9,12 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 
 data class LoginRequest(val email: String, val password: String)
-data class RegisterRequest(val email: String, val password: String)
+data class RegisterRequest(
+    val firstName: String,
+    val lastName: String,
+    val email: String,
+    val password: String
+)
 data class ApiResponse(val success: Boolean, val message: String)
 
 interface ApiService {
