@@ -12,7 +12,7 @@ import java.io.File
 object ApiUtil {
 
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://yourapi.com/") // ni se def
+        .baseUrl("http://localhost:3001/") // ni se def
         .client(OkHttpClient.Builder().build())
         .addConverterFactory(GsonConverterFactory.create())
         .build()

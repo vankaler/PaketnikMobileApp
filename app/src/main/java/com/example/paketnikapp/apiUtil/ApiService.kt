@@ -9,6 +9,6 @@ import retrofit2.http.Part
 interface ApiService {
 
     @Multipart
-    @POST("your/video/endpoint") // ni se backend poti
+    @POST("video2fa/upload") // ni se backend poti
     fun sendVideo(@Part video: MultipartBody.Part): Call<Void>
 }
