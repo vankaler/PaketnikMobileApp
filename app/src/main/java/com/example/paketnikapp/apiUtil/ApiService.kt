@@ -23,9 +23,9 @@ interface ApiService {
     @POST("video2fa/upload")
     fun sendVideo(@Part video: MultipartBody.Part): Call<Void>
 
-    @POST("api/login")
+    @POST("clients/login")
     fun login(@Body request: LoginRequest): Call<ApiResponse>
 
-    @POST("api/register")
+    @POST("clients/register")
     fun register(@Body request: RegisterRequest): Call<ApiResponse>
 }

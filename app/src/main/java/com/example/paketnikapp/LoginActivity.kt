@@ -1,6 +1,6 @@
-// src/main/java/com/example/paketnikapp/LoginActivity.kt
 package com.example.paketnikapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -29,6 +29,7 @@ import com.example.paketnikapp.ui.theme.PaketnikAppTheme
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import android.util.Log
 
 class LoginActivity : ComponentActivity() {
 
@@ -75,12 +76,29 @@ class LoginActivity : ComponentActivity() {
 
     private fun performLogin(email: String, password: String) {
         ApiUtil.login(email, password, onSuccess = { response ->
-            Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+            val message = response.message ?: "Login successful"
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             if (response.success) {
-                // Handle successful login
+                // Save login state
+                val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+                sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
+
+                // Log for debugging
+                Log.d("LoginActivity", "Login successful, launching MainActivity")
+
+                // Launch MainActivity
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Log.d("LoginActivity", "Login failed, response.success = false")
             }
         }, onFailure = { throwable ->
-            Toast.makeText(this, "Error: ${throwable.message}", Toast.LENGTH_SHORT).show()
+            val message = throwable.message ?: "An error occurred"
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+            // Log for debugging
+            Log.d("LoginActivity", "Login failed: ${throwable.message}")
         })
     }
 

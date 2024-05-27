@@ -11,7 +11,7 @@ import java.io.File
 object ApiUtil {
 
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("http://localhost:3001/")
+        .baseUrl("http://192.168.1.12:3001/")
         .client(OkHttpClient.Builder().build())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
