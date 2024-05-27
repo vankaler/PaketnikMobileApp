@@ -88,6 +88,7 @@ dependencies {
     implementation("org.json:json:20240303")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+    implementation("io.coil-kt:coil-compose:1.3.2")
 
     // Api
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

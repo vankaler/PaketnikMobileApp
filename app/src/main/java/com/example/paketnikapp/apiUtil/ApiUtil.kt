@@ -1,9 +1,9 @@
+// src/main/java/com/example/paketnikapp/apiUtil/ApiUtil.kt
 package com.example.paketnikapp.apiUtil
 
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,7 +12,7 @@ import java.io.File
 object ApiUtil {
 
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("http://localhost:3001/") // ni se def
+        .baseUrl("http://localhost:3001/")
         .client(OkHttpClient.Builder().build())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
@@ -34,6 +34,44 @@ object ApiUtil {
             }
 
             override fun onFailure(call: retrofit2.Call<Void>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
+    fun login(email: String, password: String, onSuccess: (ApiResponse) -> Unit, onFailure: (Throwable) -> Unit) {
+        val call = apiService.login(LoginRequest(email, password))
+        call.enqueue(object : retrofit2.Callback<ApiResponse> {
+            override fun onResponse(call: retrofit2.Call<ApiResponse>, response: retrofit2.Response<ApiResponse>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Login failed: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ApiResponse>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
+    fun register(email: String, password: String, onSuccess: (ApiResponse) -> Unit, onFailure: (Throwable) -> Unit) {
+        val call = apiService.register(RegisterRequest(email, password))
+        call.enqueue(object : retrofit2.Callback<ApiResponse> {
+            override fun onResponse(call: retrofit2.Call<ApiResponse>, response: retrofit2.Response<ApiResponse>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Registration failed: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ApiResponse>, t: Throwable) {
                 onFailure(t)
             }
         })

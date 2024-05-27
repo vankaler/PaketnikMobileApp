@@ -1,5 +1,7 @@
+// src/main/java/com/example/paketnikapp/LoginActivity.kt
 package com.example.paketnikapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -7,16 +9,22 @@ import androidx.activity.compose.setContent
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import coil.compose.rememberImagePainter
+import com.example.paketnikapp.apiUtil.ApiUtil
 import com.example.paketnikapp.ui.theme.PaketnikAppTheme
 import java.io.File
 import java.util.concurrent.ExecutorService
@@ -34,7 +42,12 @@ class LoginActivity : ComponentActivity() {
         setContent {
             PaketnikAppTheme {
                 LoginScreen(
-                    onCaptureClick = { capturePhoto() }
+                    onFaceIdClick = { capturePhoto() },
+                    onLoginClick = { email, password -> performLogin(email, password) },
+                    onRegisterClick = {
+                        val intent = Intent(this, RegisterActivity::class.java)
+                        startActivity(intent)
+                    }
                 )
             }
         }
@@ -54,10 +67,21 @@ class LoginActivity : ComponentActivity() {
 
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     Toast.makeText(this@LoginActivity, "Photo capture succeeded: ${photoFile.absolutePath}", Toast.LENGTH_SHORT).show()
-                    // /*TODO spohendlaj tu */
+                    // Handle the captured photo as needed
                 }
             }
         )
+    }
+
+    private fun performLogin(email: String, password: String) {
+        ApiUtil.login(email, password, onSuccess = { response ->
+            Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+            if (response.success) {
+                // Handle successful login
+            }
+        }, onFailure = { throwable ->
+            Toast.makeText(this, "Error: ${throwable.message}", Toast.LENGTH_SHORT).show()
+        })
     }
 
     override fun onDestroy() {
@@ -67,7 +91,7 @@ class LoginActivity : ComponentActivity() {
 }
 
 @Composable
-fun LoginScreen(onCaptureClick: () -> Unit) {
+fun LoginScreen(onFaceIdClick: () -> Unit, onLoginClick: (String, String) -> Unit, onRegisterClick: () -> Unit) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val previewView = remember { PreviewView(context) }
@@ -102,16 +126,48 @@ fun LoginScreen(onCaptureClick: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        AndroidView(
-            factory = { previewView },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(300.dp)
+        Spacer(modifier = Modifier.height(16.dp))
+
+        var email by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf("") }
+
+        TextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        TextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Password") },
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { onCaptureClick() }) {
-            Text("Capture Photo")
+
+        Button(
+            onClick = { onLoginClick(email, password) },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Login")
         }
+        Spacer(modifier = Modifier.height(16.dp))
+        Image(
+            painter = rememberImagePainter(data = R.drawable.face_scan),
+            contentDescription = "Face ID Login",
+            modifier = Modifier
+                .size(64.dp)
+                .clickable { onFaceIdClick() }
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Don't have an account? Register",
+            fontSize = 16.sp,
+            color = MaterialTheme.colors.primary,
+            modifier = Modifier.clickable { onRegisterClick() }
+        )
     }
 }
 
@@ -119,6 +175,6 @@ fun LoginScreen(onCaptureClick: () -> Unit) {
 @Composable
 fun LoginScreenPreview() {
     PaketnikAppTheme {
-        LoginScreen(onCaptureClick = {})
+        LoginScreen(onFaceIdClick = {}, onLoginClick = { _, _ -> }, onRegisterClick = {})
     }
 }
