@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
         if (!isLoggedIn) {
             // Redirect to LoginActivity
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, DatabaseManipulationActivity::class.java)
             startActivity(intent)
             finish()
             return

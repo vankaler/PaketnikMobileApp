@@ -7,6 +7,8 @@ import retrofit2.http.Body
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import okhttp3.ResponseBody
+import retrofit2.http.GET
 
 data class LoginRequest(val email: String, val password: String)
 data class RegisterRequest(
@@ -28,4 +30,11 @@ interface ApiService {
 
     @POST("clients")
     fun register(@Body request: RegisterRequest): Call<ApiResponse>
+
+    @GET("clients")
+    fun getAllClients(): Call<ResponseBody>
+
+    @GET("rooms")
+    fun getAllRooms(): Call<ResponseBody>
+
 }

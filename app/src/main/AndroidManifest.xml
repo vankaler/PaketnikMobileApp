@@ -38,5 +38,6 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".qr.QrScanActivity" />
+        <activity android:name=".DatabaseManipulationActivity" />
     </application>
 </manifest>

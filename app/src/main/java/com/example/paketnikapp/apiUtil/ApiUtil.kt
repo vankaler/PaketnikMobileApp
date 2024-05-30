@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import com.example.paketnikapp.apiUtil.serverIP
+import okhttp3.ResponseBody
 
 object ApiUtil {
 
@@ -76,4 +77,43 @@ object ApiUtil {
             }
         })
     }
+
+    fun getAllClients(onSuccess: (ResponseBody) -> Unit, onFailure: (Throwable) -> Unit) {
+        val call = apiService.getAllClients()
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(call: retrofit2.Call<ResponseBody>, response: retrofit2.Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to get all clients: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
+    fun getAllRooms(onSuccess: (ResponseBody) -> Unit, onFailure: (Throwable) -> Unit){
+        val call = apiService.getAllRooms()
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(call: retrofit2.Call<ResponseBody>, response: retrofit2.Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to get all rooms: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
 }
