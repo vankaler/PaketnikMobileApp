@@ -7,11 +7,12 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import com.example.paketnikapp.apiUtil.serverIP
 
 object ApiUtil {
 
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.1.12:3001/")
+        .baseUrl("http://" + serverIP + ":3001/")
         .client(OkHttpClient.Builder().build())
         .addConverterFactory(GsonConverterFactory.create())
         .build()

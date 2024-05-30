@@ -30,6 +30,10 @@ import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import android.util.Log
+import androidx.camera.camera2.Camera2Config
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.Lifecycle
 
 class LoginActivity : ComponentActivity() {
 
@@ -192,7 +196,25 @@ fun LoginScreen(onFaceIdClick: () -> Unit, onLoginClick: (String, String) -> Uni
 @androidx.compose.ui.tooling.preview.Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    PaketnikAppTheme {
-        LoginScreen(onFaceIdClick = {}, onLoginClick = { _, _ -> }, onRegisterClick = {})
+    // Create a fake LifecycleOwner
+    val lifecycleOwner = remember {
+        object : LifecycleOwner {
+            private val lifecycleRegistry = LifecycleRegistry(this).apply {
+                currentState = Lifecycle.State.RESUMED
+            }
+
+            override val lifecycle: Lifecycle
+                get() = lifecycleRegistry
+        }
+    }
+
+    // Provide the CompositionLocals
+    CompositionLocalProvider(
+        LocalLifecycleOwner provides lifecycleOwner,
+        LocalContext provides LocalContext.current
+    ) {
+        PaketnikAppTheme {
+            LoginScreen(onFaceIdClick = {}, onLoginClick = { _, _ -> }, onRegisterClick = {})
+        }
     }
 }
