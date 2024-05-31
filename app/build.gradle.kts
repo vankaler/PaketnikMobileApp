@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.android.application")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -106,4 +108,7 @@ dependencies {
     // Glide for image handling
     implementation("com.github.bumptech.glide:glide:4.11.0")
 
+    // Push notifications
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))    implementation 'com.google.firebase:firebase-messaging'
+    implementation("com.google.firebase:firebase-analytics")
 }
