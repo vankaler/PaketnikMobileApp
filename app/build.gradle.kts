@@ -86,6 +86,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.google.zxing:core:3.5.3")
     implementation("org.json:json:20240303")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
     implementation("io.coil-kt:coil-compose:1.3.2")

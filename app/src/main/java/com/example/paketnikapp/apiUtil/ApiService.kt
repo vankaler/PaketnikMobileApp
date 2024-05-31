@@ -9,6 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 import okhttp3.ResponseBody
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 data class LoginRequest(val email: String, val password: String)
 data class RegisterRequest(
@@ -34,7 +35,17 @@ interface ApiService {
     @GET("clients")
     fun getAllClients(): Call<ResponseBody>
 
+    @GET("clients/{id}")
+    fun getClientById(@Path("id") id: String): Call<ResponseBody>
+
     @GET("rooms")
     fun getAllRooms(): Call<ResponseBody>
+    @GET("rooms/{id}")
+    fun getRoomById(@Path("id") id: String): Call<ResponseBody>
+
+    @GET("staff")
+    fun getAllStaff(): Call<ResponseBody>
+    @GET("staff/{id}")
+    fun getStaffById(@Path("id") id: String): Call<ResponseBody>
 
 }

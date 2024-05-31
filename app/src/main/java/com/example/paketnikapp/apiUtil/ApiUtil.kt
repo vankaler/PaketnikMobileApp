@@ -97,6 +97,28 @@ object ApiUtil {
         })
     }
 
+    fun getClientById(id: String, onSuccess: (ResponseBody) -> Unit, onFailure: (Throwable) -> Unit) {
+        val call = apiService.getClientById(id)
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(
+                call: retrofit2.Call<ResponseBody>,
+                response: retrofit2.Response<ResponseBody>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to get client by id: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
     fun getAllRooms(onSuccess: (ResponseBody) -> Unit, onFailure: (Throwable) -> Unit){
         val call = apiService.getAllRooms()
         call.enqueue(object : retrofit2.Callback<ResponseBody> {
@@ -116,4 +138,66 @@ object ApiUtil {
         })
     }
 
+    fun getRoomById(id: String, onSuccess: (ResponseBody) -> Unit, onFailure: (Throwable) -> Unit) {
+        val call = apiService.getRoomById(id)
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(
+                call: retrofit2.Call<ResponseBody>,
+                response: retrofit2.Response<ResponseBody>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to get room by id: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
+    fun getAllStaff(onSuccess: (ResponseBody) -> Unit, onFailure: (Throwable) -> Unit){
+        val call = apiService.getAllStaff()
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(call: retrofit2.Call<ResponseBody>, response: retrofit2.Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to get all staff: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
+    fun getStaffById(id: String, onSuccess: (ResponseBody) -> Unit, onFailure: (Throwable) -> Unit) {
+        val call = apiService.getStaffById(id)
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(
+                call: retrofit2.Call<ResponseBody>,
+                response: retrofit2.Response<ResponseBody>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to get staff by id: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
 }
