@@ -14,8 +14,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -25,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import com.example.paketnikapp.qr.QrScanActivity
 import com.example.paketnikapp.ui.theme.PaketnikAppTheme
 import androidx.compose.animation.core.*
+import androidx.camera.view.PreviewView
+import com.example.paketnikapp.util.CameraUtil
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import org.json.JSONObject
@@ -34,6 +35,8 @@ import java.io.IOException
 import android.util.Base64
 
 class MainActivity : ComponentActivity() {
+    private lateinit var cameraUtil: CameraUtil
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,9 +54,14 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             PaketnikAppTheme {
-                AppSurface { startQRScanner() }
+                AppSurface { startCameraActivity() }
             }
         }
+    }
+
+    private fun startCameraActivity() {
+        val intent = Intent(this, CameraActivity::class.java)
+        startActivity(intent)
     }
 
     private fun startQRScanner() {

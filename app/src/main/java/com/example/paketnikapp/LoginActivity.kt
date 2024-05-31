@@ -43,7 +43,7 @@ class LoginActivity : ComponentActivity() {
         setContent {
             PaketnikAppTheme {
                 LoginScreen(
-                    onFaceIdClick = { capturePhoto() },
+                    onFaceIdClick = { startCameraActivity() },
                     onLoginClick = { email, password -> performLogin(email, password) },
                     onRegisterClick = {
                         val intent = Intent(this, RegisterActivity::class.java)
@@ -52,6 +52,11 @@ class LoginActivity : ComponentActivity() {
                 )
             }
         }
+    }
+
+    private fun startCameraActivity() {
+        val intent = Intent(this, CameraActivity::class.java)
+        startActivity(intent)
     }
 
     private fun capturePhoto() {
@@ -90,8 +95,6 @@ class LoginActivity : ComponentActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
-            } else {
-                Log.d("LoginActivity", "Login failed, response.success = false")
             }
         }, onFailure = { throwable ->
             val message = throwable.message ?: "An error occurred"
