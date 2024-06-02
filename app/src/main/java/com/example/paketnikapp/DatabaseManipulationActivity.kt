@@ -50,6 +50,9 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import com.example.paketnikapp.ui.theme.Primary
 
 class DatabaseManipulationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -154,16 +157,12 @@ class DatabaseManipulationActivity : ComponentActivity() {
         }
 
         Column {
-            TextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
-                label = { Text("Search") },
-                modifier = Modifier.fillMaxWidth()
-            )
 
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp)) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
                 Text(
                     text = selectedOption,
                     modifier = Modifier
@@ -174,32 +173,55 @@ class DatabaseManipulationActivity : ComponentActivity() {
                     color = Color.Black,
                     fontSize = 20.sp
                 )
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false }
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = Color.Red,
+                    contentColor = Color.Black
                 ) {
-                    DropdownMenuItem(onClick = {
-                        selectedOption = "Clients"
-                        expanded = false
-                    }) {
-                        Text("Clients")
-                    }
-                    DropdownMenuItem(onClick = {
-                        selectedOption = "Rooms"
-                        expanded = false
-                    }) {
-                        Text("Rooms")
-                    }
-                    DropdownMenuItem(onClick = {
-                        selectedOption = "Staff"
-                        expanded = false
-                    }) {
-                        Text("Staff")
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        DropdownMenuItem(onClick = {
+                            selectedOption = "Clients"
+                            expanded = false
+                        }) {
+                            Text("Clients")
+                        }
+                        DropdownMenuItem(onClick = {
+                            selectedOption = "Rooms"
+                            expanded = false
+                        }) {
+                            Text("Rooms")
+                        }
+                        DropdownMenuItem(onClick = {
+                            selectedOption = "Staff"
+                            expanded = false
+                        }) {
+                            Text("Staff")
+                        }
                     }
                 }
             }
 
-            displayLabels(selectedOption)
+            TextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                label = { Text("Search") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color.White,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    cursorColor = Color.Black
+                ),
+                shape = RoundedCornerShape(12.dp),
+                textStyle = TextStyle(color = Color.Black),
+                singleLine = true
+            )
 
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 when (selectedOption) {
@@ -346,7 +368,7 @@ class DatabaseManipulationActivity : ComponentActivity() {
             if (isLoading) {
                 CircularProgressIndicator(modifier = Modifier.padding(16.dp))
             } else {
-                Text("$itemType ID: $itemId", modifier = Modifier.padding(16.dp))
+                Text("$itemType ID: $itemId", modifier = Modifier.padding(16.dp), fontWeight = FontWeight.Bold)
                 if(itemType == "Client"){
                     var firstName by remember { mutableStateOf(client!!.name) }
                     var lastName by remember { mutableStateOf(client!!.lastname) }
@@ -355,19 +377,46 @@ class DatabaseManipulationActivity : ComponentActivity() {
                         value = firstName,
                         onValueChange = { firstName = it },
                         label = { Text("First Name") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            cursorColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(12.dp),
+                        textStyle = TextStyle(color = Color.Black),
+                        singleLine = true
                     )
                     TextField(
                         value = lastName,
                         onValueChange = { lastName = it },
                         label = { Text("Last Name") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            cursorColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(12.dp),
+                        textStyle = TextStyle(color = Color.Black),
+                        singleLine = true
                     )
                     TextField(
                         value = email,
                         onValueChange = { email = it },
                         label = { Text("Email") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            cursorColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(12.dp),
+                        textStyle = TextStyle(color = Color.Black),
+                        singleLine = true
                     )
                 }
                 if(itemType == "Room") {
@@ -377,28 +426,32 @@ class DatabaseManipulationActivity : ComponentActivity() {
                         value = number,
                         onValueChange = { number = it },
                         label = { Text("Number") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            cursorColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(12.dp),
+                        textStyle = TextStyle(color = Color.Black),
+                        singleLine = true
                     )
                     TextField(
                         value = size,
                         onValueChange = { size = it },
                         label = { Text("Size") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            cursorColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(12.dp),
+                        textStyle = TextStyle(color = Color.Black),
+                        singleLine = true
                     )
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            text = "Occupied: ",
-                            modifier = Modifier.padding(8.dp)
-                        )
-                        Icon(
-                            imageVector = if (room!!.occupied) Icons.Default.Check else Icons.Default.Clear,
-                            contentDescription = if (room!!.occupied) "Occupied" else "Not occupied",
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
                 }
                 else if(itemType == "Staff") {
                     var firstName by remember { mutableStateOf(staff!!.name) }
@@ -409,25 +462,61 @@ class DatabaseManipulationActivity : ComponentActivity() {
                         value = firstName,
                         onValueChange = { firstName = it },
                         label = { Text("First Name") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            cursorColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(12.dp),
+                        textStyle = TextStyle(color = Color.Black),
+                        singleLine = true
                     )
                     TextField(
                         value = lastName,
                         onValueChange = { lastName = it },
                         label = { Text("Last Name") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            cursorColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(12.dp),
+                        textStyle = TextStyle(color = Color.Black),
+                        singleLine = true
                     )
                     TextField(
                         value = email,
                         onValueChange = { email = it },
                         label = { Text("Email") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            cursorColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(12.dp),
+                        textStyle = TextStyle(color = Color.Black),
+                        singleLine = true
                     )
                     TextField(
                         value = level,
                         onValueChange = { level = it },
                         label = { Text("Level") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            cursorColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(12.dp),
+                        textStyle = TextStyle(color = Color.Black),
+                        singleLine = true
                     )
                 }
                 Button(
@@ -443,167 +532,151 @@ class DatabaseManipulationActivity : ComponentActivity() {
     }
 
     @Composable
-    fun displayLabels(selectedOption: String) {
-        Row {
-            when (selectedOption) {
-                "Clients" -> {
-                    Text("Created", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
-                    Text("ID", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
-                    Text("Name", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
-                    Text("Email", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
+    fun displayClient(client: Client) {
+        Card(modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.padding(8.dp)) {
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Created: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = client.created.format(formatter), style = MaterialTheme.typography.body1)
+                    }
                 }
-                "Rooms" -> {
-                    Text("Created", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
-                    Text("ID", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
-                    Text("Number", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
-                    Text("Size", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
-                    Text("Occupied", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "ID: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = client.id, style = MaterialTheme.typography.body1)
+                    }
                 }
-                "Staff" -> {
-                    Text("Created", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
-                    Text("ID", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
-                    Text("Name", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
-                    Text("Email", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
-                    Text("Level", modifier = Modifier
-                        .padding(8.dp)
-                        .weight(1f))
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Name: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "${client.name} ${client.lastname}", style = MaterialTheme.typography.body1)
+                    }
+                }
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Email: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = client.email, style = MaterialTheme.typography.body1)
+                    }
                 }
             }
-        }
-    }
-
-    @Composable
-    fun displayClient(client: Client) {
-        Row {
-            Text(
-                text = client.created.format(formatter),
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
-            Text(
-                text = client.id,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
-            Text(
-                text = client.name + " " + client.lastname,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
-            Text(
-                text = client.email,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
         }
     }
 
     @Composable
     fun displayRoom(room: Room) {
-        Row {
-            Text(
-                text = room.created.format(formatter),
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
-            Text(
-                text = room.id,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
-            Text(
-                text = room.number.toString(),
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
-            Text(
-                text = room.size.toString(),
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
-            Text(
-                text = room.occupied.toString(),
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
+        Card(modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+        )
+        {
+            Column(modifier = Modifier.padding(8.dp)) {
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Created: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = room.created.format(formatter), style = MaterialTheme.typography.body1)
+                    }
+                }
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "ID: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = room.id, style = MaterialTheme.typography.body1)
+                    }
+                }
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Number: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = room.number.toString(), style = MaterialTheme.typography.body1)
+                    }
+                }
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Size: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = room.size.toString(), style = MaterialTheme.typography.body1)
+                    }
+                }
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Occupied: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Icon(
+                            imageVector = if (room.occupied) Icons.Default.Check else Icons.Default.Clear,
+                            contentDescription = if (room.occupied) "Occupied" else "Not occupied"
+                        )
+                    }
+                }
+            }
         }
     }
 
     @Composable
     fun displayStaff(staff: Staff) {
-        Row {
-            Text(
-                text = staff.created.format(formatter),
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
-            Text(
-                text = staff.id,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
-            Text(
-                text = staff.name + " " + staff.lastname,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
-            Text(
-                text = staff.email,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
-            val levelColor = when (staff.level.toInt()) {
-                1 -> Color.Green
-                2 -> Color.Yellow
-                3 -> Color.Red
-                else -> Color.Gray
+        Card(modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.padding(8.dp)) {
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Created: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = staff.created.format(formatter), style = MaterialTheme.typography.body1)
+                    }
+                }
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "ID: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = staff.id, style = MaterialTheme.typography.body1)
+                    }
+                }
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Name: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "${staff.name} ${staff.lastname}", style = MaterialTheme.typography.body1)
+                    }
+                }
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Email: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = staff.email, style = MaterialTheme.typography.body1)
+                    }
+                }
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Level: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = staff.level.toString(), style = MaterialTheme.typography.body1)
+                    }
+                }
             }
-            Text(
-                text = staff.level.toString(),
-                color = levelColor,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            )
         }
     }
 }
