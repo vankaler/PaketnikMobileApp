@@ -89,7 +89,8 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
-    implementation("io.coil-kt:coil-compose:1.3.2")
+    implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation("com.squareup.picasso:picasso:2.71828")
 
     // Api
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -104,6 +105,7 @@ dependencies {
     implementation ("androidx.camera:camera-lifecycle:1.3.3")
     implementation ("androidx.camera:camera-video:1.3.3")
     implementation ("androidx.camera:camera-view:1.3.3")
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
 
     // Glide for image handling

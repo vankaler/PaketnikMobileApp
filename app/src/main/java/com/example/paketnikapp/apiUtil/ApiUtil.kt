@@ -1,14 +1,14 @@
 package com.example.paketnikapp.apiUtil
 
+import android.util.Log
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
-import com.example.paketnikapp.apiUtil.serverIP
-import okhttp3.ResponseBody
 
 object ApiUtil {
 
@@ -167,9 +167,10 @@ object ApiUtil {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         onSuccess(it)
+                        Log.e("Image", it.string())
                     } ?: onFailure(Exception("Empty response body"))
                 } else {
-                    onFailure(Exception("Failed to get all staff: ${response.code()}"))
+                    onFailure(Exception("Failed to get image: ${response.code()}"))
                 }
             }
 
@@ -200,4 +201,24 @@ object ApiUtil {
             }
         })
     }
+
+    fun getAllInfo(onSuccess: (ResponseBody) -> Unit, onFailure: (Throwable) -> Unit){
+        val call = apiService.getAllInfo()
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(call: retrofit2.Call<ResponseBody>, response: retrofit2.Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to get all info: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
 }

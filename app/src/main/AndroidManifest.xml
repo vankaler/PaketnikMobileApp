@@ -39,5 +39,6 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".qr.QrScanActivity" />
         <activity android:name=".DatabaseManipulationActivity" />
+        <activity android:name=".InformationActivity" />
     </application>
 </manifest>

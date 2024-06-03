@@ -2,13 +2,13 @@
 package com.example.paketnikapp.apiUtil
 
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
-import okhttp3.ResponseBody
-import retrofit2.http.GET
 import retrofit2.http.Path
 
 data class LoginRequest(val email: String, val password: String)
@@ -47,5 +47,9 @@ interface ApiService {
     fun getAllStaff(): Call<ResponseBody>
     @GET("staff/{id}")
     fun getStaffById(@Path("id") id: String): Call<ResponseBody>
+
+    @GET("info")
+    fun getAllInfo(): Call<ResponseBody>
+
 
 }
