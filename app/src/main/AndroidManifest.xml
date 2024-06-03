@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Camera feature -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
 
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -24,6 +26,7 @@
         android:theme="@style/Theme.PaketnikApp"
         tools:targetApi="31">
 
+        <!-- Main activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -35,18 +38,35 @@
             </intent-filter>
         </activity>
 
+        <!-- Other activities -->
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".CameraActivity" />
         <activity android:name=".qr.QrScanActivity" />
 
+        <!-- Firebase Messaging Service -->
         <service
             android:name=".MyFirebaseMessagingService"
-            android:exported="true">
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <!-- Firebase Initialization -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
     </application>
 
 </manifest>

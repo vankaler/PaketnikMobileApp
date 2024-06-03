@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PaketnikApp</string>
+    <string name="default_notification_channel_id">default_channel</string>
+
 </resources>
