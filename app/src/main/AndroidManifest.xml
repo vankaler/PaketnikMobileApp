@@ -16,6 +16,7 @@
 
     <application
         android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -43,6 +44,9 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CameraActivity" />
         <activity android:name=".qr.QrScanActivity" />
+        <activity android:name=".DatabaseManipulationActivity" />
+        <activity android:name=".InformationActivity" />
+
 
         <!-- Firebase Messaging Service -->
         <service
