@@ -14,8 +14,11 @@ data class RegisterRequest(
     val email: String,
     val password: String
 )
-data class ApiResponse(val success: Boolean, val message: String)
-
+data class ApiResponse(
+    val success: Boolean,
+    val message: String?,
+    val userId: String?
+)
 interface ApiService {
 
     @Multipart
@@ -27,4 +30,7 @@ interface ApiService {
 
     @POST("clients")
     fun register(@Body request: RegisterRequest): Call<ApiResponse>
+
+    @POST("clients/logout")
+    fun logout(): Call<ApiResponse>
 }

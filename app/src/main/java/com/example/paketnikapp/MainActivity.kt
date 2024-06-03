@@ -36,6 +36,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import android.util.Base64
 import android.util.Log
+import androidx.compose.ui.platform.LocalContext
 import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : ComponentActivity() {
@@ -108,7 +109,7 @@ class MainActivity : ComponentActivity() {
     """
         val body = RequestBody.create("application/json; charset=utf-8".toMediaType(), json)
         val request = Request.Builder()
-            .url("http://10.0.2.2:3000/api/register-fcm-token")
+            .url("http://10.0.2.2:3000/clients/register-fcm-token")
             .post(body)
             .build()
 
@@ -117,7 +118,7 @@ class MainActivity : ComponentActivity() {
                 Log.e("MainActivity", "Failed to send FCM token: ${e.message}")
             }
 
-            override fun onResponse(call: Call, response: Response) {
+            override fun onResponse(call: Call, response: okhttp3.Response) {
                 if (response.isSuccessful) {
                     Log.d("MainActivity", "FCM token sent successfully")
                 } else {
@@ -247,6 +248,8 @@ fun MainPage(onScanClick: () -> Unit) {
         InstructionText()
         Spacer(modifier = Modifier.height(32.dp))
         ScanButton(pulseScale, onScanClick)
+        Spacer(modifier = Modifier.height(32.dp))
+        LogoutButton()
     }
 }
 
@@ -276,6 +279,25 @@ fun ScanButton(pulseScale: Float, onScanClick: () -> Unit) {
         shape = CircleShape
     ) {
         Icon(imageVector = Icons.Default.CameraAlt, contentDescription = "Scan QR Code")
+    }
+}
+
+@Composable
+fun LogoutButton() {
+    val context = LocalContext.current
+    Button(
+        onClick = {
+            val sharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+            sharedPreferences.edit().clear().apply()
+            Toast.makeText(context, "Logged out successfully", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(context, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            context.startActivity(intent)
+        },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text("Logout")
     }
 }
 

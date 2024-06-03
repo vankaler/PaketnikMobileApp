@@ -11,7 +11,6 @@ import java.io.File
 object ApiUtil {
 
     private val retrofit: Retrofit = Retrofit.Builder()
-        //.baseUrl("http://192.168.1.12:3001/") //nejc tvoja prejsnja koda
         .baseUrl("http://10.0.2.2:3001/")
         .client(OkHttpClient.Builder().build())
         .addConverterFactory(GsonConverterFactory.create())
@@ -68,6 +67,25 @@ object ApiUtil {
                     } ?: onFailure(Exception("Empty response body"))
                 } else {
                     onFailure(Exception("Registration failed: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ApiResponse>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
+    fun logout(onSuccess: (ApiResponse) -> Unit, onFailure: (Throwable) -> Unit) {
+        val call = apiService.logout()
+        call.enqueue(object : retrofit2.Callback<ApiResponse> {
+            override fun onResponse(call: retrofit2.Call<ApiResponse>, response: retrofit2.Response<ApiResponse>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Logout failed: ${response.code()}"))
                 }
             }
 
