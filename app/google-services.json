@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "51556322906",
+    "project_id": "paketnikapp",
+    "storage_bucket": "paketnikapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51556322906:android:9d1563d73355f80bbe9263",
+        "android_client_info": {
+          "package_name": "com.example.paketnikapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4HSc_nrXQuxcf08puc6ALmwkWcJ71ZJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

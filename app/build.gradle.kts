@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.android.application")
     id("com.google.gms.google-services")
 }
 
@@ -35,7 +34,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-        // Enabling core library desugaring
         isCoreLibraryDesugaringEnabled = true
     }
 
@@ -74,6 +72,7 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.activity:activity:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.firebase:firebase-messaging-ktx:24.0.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
@@ -98,17 +97,17 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // Video and image
-    implementation ("androidx.camera:camera-core:1.1.0")
-    implementation ("androidx.camera:camera-camera2:1.1.0")
-    implementation ("androidx.camera:camera-lifecycle:1.1.0")
-    implementation ("androidx.camera:camera-video:1.1.0")
-    implementation ("androidx.camera:camera-view:1.0.0-alpha29")
-
+    implementation("androidx.camera:camera-core:1.1.0")
+    implementation("androidx.camera:camera-camera2:1.1.0")
+    implementation("androidx.camera:camera-lifecycle:1.1.0")
+    implementation("androidx.camera:camera-video:1.1.0")
+    implementation("androidx.camera:camera-view:1.0.0-alpha29")
 
     // Glide for image handling
     implementation("com.github.bumptech.glide:glide:4.11.0")
 
     // Push notifications
-    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))    implementation 'com.google.firebase:firebase-messaging'
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+    implementation("com.google.firebase:firebase-messaging")
     implementation("com.google.firebase:firebase-analytics")
 }

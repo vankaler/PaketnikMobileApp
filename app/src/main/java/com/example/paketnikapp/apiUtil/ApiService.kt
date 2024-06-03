@@ -1,4 +1,3 @@
-// src/main/java/com/example/paketnikapp/apiUtil/ApiService.kt
 package com.example.paketnikapp.apiUtil
 
 import okhttp3.MultipartBody

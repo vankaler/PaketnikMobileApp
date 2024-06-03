@@ -1,11 +1,16 @@
 package com.example.paketnikapp
 
+import android.Manifest
+import okhttp3.*
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -26,10 +31,16 @@ import androidx.core.content.ContextCompat
 import coil.compose.rememberImagePainter
 import com.example.paketnikapp.apiUtil.ApiUtil
 import com.example.paketnikapp.ui.theme.PaketnikAppTheme
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import android.util.Log
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.RequestBody
+import java.io.IOException
 
 class LoginActivity : ComponentActivity() {
 
@@ -38,7 +49,13 @@ class LoginActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         cameraExecutor = Executors.newSingleThreadExecutor()
+
+        // Zahteva za dovoljenje za pošiljanje obvestil
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestNotificationPermission()
+        }
 
         setContent {
             PaketnikAppTheme {
@@ -80,6 +97,56 @@ class LoginActivity : ComponentActivity() {
     }
 
     private fun performLogin(email: String, password: String) {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("LoginActivity", "Fetching FCM registration token failed", task.exception)
+                return@addOnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Pošljite token vašemu strežniku
+            sendTokenToServer(token, email, password)
+        }
+    }
+
+    private fun sendTokenToServer(token: String, email: String, password: String) {
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("userId", null)
+
+        val client = OkHttpClient()
+        val json = """
+        {
+            "userId": "$userId",
+            "fcmToken": "$token"
+        }
+    """
+        val body = RequestBody.create("application/json; charset=utf-8".toMediaType(), json)
+        val request = Request.Builder()
+            .url("http://10.0.2.2:3001/clients/register-fcm-token")
+            .post(body)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("LoginActivity", "Failed to send FCM token: ${e.message}")
+                // Handle the failure to register token
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    Log.d("LoginActivity", "FCM token sent successfully")
+                    // After successfully registering the token, proceed with login
+                    attemptLogin(email, password)
+                } else {
+                    Log.e("LoginActivity", "Failed to send FCM token: ${response.message}")
+                }
+            }
+        })
+    }
+
+    private fun attemptLogin(email: String, password: String) {
         ApiUtil.login(email, password, onSuccess = { response ->
             val message = response.message ?: "Login successful"
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -103,6 +170,20 @@ class LoginActivity : ComponentActivity() {
             // Log for debugging
             Log.d("LoginActivity", "Login failed: ${throwable.message}")
         })
+    }
+
+    private fun requestNotificationPermission() {
+        val permissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Notification permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
     }
 
     override fun onDestroy() {

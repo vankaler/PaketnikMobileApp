@@ -1,20 +1,24 @@
 package com.example.paketnikapp
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -24,8 +28,6 @@ import androidx.compose.ui.unit.dp
 import com.example.paketnikapp.qr.QrScanActivity
 import com.example.paketnikapp.ui.theme.PaketnikAppTheme
 import androidx.compose.animation.core.*
-import androidx.camera.view.PreviewView
-import com.example.paketnikapp.util.CameraUtil
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import org.json.JSONObject
@@ -33,10 +35,10 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import android.util.Base64
+import android.util.Log
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : ComponentActivity() {
-    private lateinit var cameraUtil: CameraUtil
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,16 +54,77 @@ class MainActivity : ComponentActivity() {
             return
         }
 
+        // Request notification permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestNotificationPermission()
+        } else {
+            registerFCMToken()
+        }
+
         setContent {
             PaketnikAppTheme {
-                AppSurface { startCameraActivity() }
+                AppSurface { startQRScanner() }
             }
         }
     }
 
-    private fun startCameraActivity() {
-        val intent = Intent(this, CameraActivity::class.java)
-        startActivity(intent)
+    private fun requestNotificationPermission() {
+        val permissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show()
+                // Proceed with registering FCM token
+                registerFCMToken()
+            } else {
+                Toast.makeText(this, "Notification permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+    }
+
+    private fun registerFCMToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Toast.makeText(this, "Fetching FCM token failed", Toast.LENGTH_SHORT).show()
+                return@addOnCompleteListener
+            }
+            val token = task.result
+            sendTokenToServer(token)
+        }
+    }
+
+    private fun sendTokenToServer(token: String) {
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("userId", null)
+
+        val client = OkHttpClient()
+        val json = """
+        {
+            "userId": "$userId",
+            "fcmToken": "$token"
+        }
+    """
+        val body = RequestBody.create("application/json; charset=utf-8".toMediaType(), json)
+        val request = Request.Builder()
+            .url("http://10.0.2.2:3000/api/register-fcm-token")
+            .post(body)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("MainActivity", "Failed to send FCM token: ${e.message}")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    Log.d("MainActivity", "FCM token sent successfully")
+                } else {
+                    Log.e("MainActivity", "Failed to send FCM token: ${response.message}")
+                }
+            }
+        })
     }
 
     private fun startQRScanner() {
