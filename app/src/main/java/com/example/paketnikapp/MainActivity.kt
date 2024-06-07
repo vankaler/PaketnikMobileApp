@@ -21,6 +21,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,10 +31,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -82,8 +85,17 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             PaketnikAppTheme {
-                AppSurface { startQRScanner() }
+                Scaffold(
+                    bottomBar = { BottomBar() }
+                ) { paddingValues ->
+                    Box(modifier = Modifier.padding(paddingValues)) {
+                        AppSurface {
+                            startQRScanner()
+                        }
+                    }
+                }
             }
+
         }
     }
 
@@ -269,6 +281,28 @@ fun MainPage(onScanClick: () -> Unit) {
         ScanButton(pulseScale, onScanClick)
         Spacer(modifier = Modifier.height(32.dp))
         LogoutButton()
+    }
+}
+
+@Composable
+fun BottomBar() {
+    val context = LocalContext.current
+    BottomAppBar {
+        Button(onClick = {
+            val intent = Intent(context, InformationActivity::class.java)
+            context.startActivity(intent)
+        }) {
+            Text("Information")
+        }
+
+        Button(onClick = {
+            val intent = Intent(context, LoginActivity::class.java)
+            context.startActivity(intent)
+        }) {
+            Text("Login")
+        }
+
+        // Add more buttons for more activities
     }
 }
 
