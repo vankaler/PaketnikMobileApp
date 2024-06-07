@@ -110,8 +110,11 @@ class MainActivity : ComponentActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == QR_SCANNER_REQUEST_CODE && resultCode == RESULT_OK) {
             val qrContent = data?.getStringExtra("QR_CONTENT")
-            qrContent?.let {
-                openBox(it, this)
+            Log.e("QR Content", qrContent ?: "null")
+            if (qrContent != null) {
+                openBox(qrContent, this)
+            } else {
+                showMessage(this, "Failed to get box ID from QR code")
             }
         }
     }
@@ -126,18 +129,37 @@ class MainActivity : ComponentActivity() {
 }
 
 private fun openBox(boxId: String, context: Context) {
+    Log.e("Request", "Opening box with ID: $boxId")
     val client = OkHttpClient()
+    val path = boxId.substringAfter("HTTPS://B.DIRECT4.ME/")
+    val pathWithoutTrailingSlash = path.removeSuffix("/")
+    Log.e("Request", "Opening box with ID: $pathWithoutTrailingSlash")
+    val parts = pathWithoutTrailingSlash.split("/")
+    val boxIdWithLeadingZeros = parts[1]
+    val splitBoxId = boxIdWithLeadingZeros.trimStart('0')
+    val splitBoxIdInt = splitBoxId.toInt()
+    val qrCodeInfo = pathWithoutTrailingSlash
+    Log.e("Request", "Split box ID: $splitBoxId")
     val json = """
-        {
-            "boxId": $boxId,
-            "tokenFormat": 0
-        }
+    {
+        "deliveryId": 0,
+        "boxId": $splitBoxIdInt,
+        "tokenFormat": 5,
+        "latitude": null,
+        "longitude": null,
+        "qrCodeInfo": "$qrCodeInfo",
+        "terminalSeed": null,
+        "isMultibox": false,
+        "doorIndex": null,
+        "addAccessLog": false
+    }
     """
+    Log.e("Request", json)
     val body = RequestBody.create("application/json; charset=utf-8".toMediaType(), json)
     val request = Request.Builder()
         .url("https://api-d4me-stage.direct4.me/sandbox/v1/Access/openbox")
         .post(body)
-        .addHeader("x-api-key", "9ea96945-3a37-4638-a5d4-22e89fbc998f")
+        .addHeader("Authorization", "Bearer 9ea96945-3a37-4638-a5d4-22e89fbc998f")
         .build()
 
     client.newCall(request).enqueue(object : Callback {
@@ -148,21 +170,44 @@ private fun openBox(boxId: String, context: Context) {
         }
 
         override fun onResponse(call: Call, response: Response) {
-            response.body?.let { responseBody ->
-                val responseData = JSONObject(responseBody.string())
-                val base64Token = responseData.getString("data")
-                playToken(base64Token, context)
+            if (!response.isSuccessful) {
+                Log.e("Response", "Request failed with status code: ${response.code}")
+                if (response.code == 400 && response.body != null) {
+                    Log.e("Response", "Response body: ${response.body!!.string()}")
+                }
+                Handler(Looper.getMainLooper()).post {
+                    showMessage(context, "Request failed with status code: ${response.code}")
+                }
+            } else {
+                response.body?.let { responseBody ->
+                    val responseBodyString = responseBody.string()
+                    if (responseBodyString.isNotBlank()) {
+                        Log.e("Response", responseBodyString)
+                        val responseData = JSONObject(responseBodyString)
+                        val base64Token = responseData.getString("data")
+                        playToken(base64Token, context)
+                    } else {
+                        Log.e("Response", "Response body is empty")
+                        Handler(Looper.getMainLooper()).post {
+                            showMessage(context, "Response body is empty")
+                        }
+                    }
+                }
             }
         }
     })
 }
 
 private fun playToken(base64Token: String, context: Context) {
+    Log.e("Token", base64Token.substring(0, 10) + "...")
+
     try {
         // Decode Base64 token and save as .wav file
         val decodedBytes = Base64.decode(base64Token, Base64.DEFAULT)
         val tokenFile = File(context.cacheDir, "token.wav")
         FileOutputStream(tokenFile).use { it.write(decodedBytes) }
+
+        Log.e("Token", "Decoded token saved to: ${tokenFile.absolutePath}")
 
         // Play the .wav file
         val mediaPlayer = MediaPlayer().apply {
@@ -179,6 +224,7 @@ private fun playToken(base64Token: String, context: Context) {
     } catch (e: Exception) {
         Handler(Looper.getMainLooper()).post {
             showMessage(context, "Failed to play token: ${e.message}")
+            Log.e("Token", "Failed to play token: ${e.message}")
         }
     }
 }
