@@ -1,3 +1,3 @@
 package com.example.paketnikapp.apiUtil
 
-val serverIP = "164.8.222.15"
+val serverIP = "10.0.2.2"

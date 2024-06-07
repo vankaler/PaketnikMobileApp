@@ -47,7 +47,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.paketnikapp.qr.QrScanActivity
 import com.example.paketnikapp.ui.theme.PaketnikAppTheme
-import com.google.firebase.messaging.FirebaseMessaging
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -70,7 +69,7 @@ class MainActivity : ComponentActivity() {
 
         if (!isLoggedIn) {
             // Redirect to LoginActivity
-            val intent = Intent(this, RegisterActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
             return
@@ -79,12 +78,12 @@ class MainActivity : ComponentActivity() {
         // Request notification permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             requestNotificationPermission()
-        } else {
-            registerFCMToken()
         }
 
         setContent {
-
+            PaketnikAppTheme {
+                AppSurface { startQRScanner() }
+            }
         }
     }
 
@@ -94,57 +93,12 @@ class MainActivity : ComponentActivity() {
         ) { isGranted: Boolean ->
             if (isGranted) {
                 Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show()
-                // Proceed with registering FCM token
-                registerFCMToken()
             } else {
                 Toast.makeText(this, "Notification permission denied", Toast.LENGTH_SHORT).show()
             }
         }
 
         permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-    }
-
-    private fun registerFCMToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Toast.makeText(this, "Fetching FCM token failed", Toast.LENGTH_SHORT).show()
-                return@addOnCompleteListener
-            }
-            val token = task.result
-            sendTokenToServer(token)
-        }
-    }
-
-    private fun sendTokenToServer(token: String) {
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-        val userId = sharedPreferences.getString("userId", null)
-
-        val client = OkHttpClient()
-        val json = """
-        {
-            "userId": "$userId",
-            "fcmToken": "$token"
-        }
-    """
-        val body = RequestBody.create("application/json; charset=utf-8".toMediaType(), json)
-        val request = Request.Builder()
-            .url("http://10.0.2.2:3000/clients/register-fcm-token")
-            .post(body)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("MainActivity", "Failed to send FCM token: ${e.message}")
-            }
-
-            override fun onResponse(call: Call, response: okhttp3.Response) {
-                if (response.isSuccessful) {
-                    Log.d("MainActivity", "FCM token sent successfully")
-                } else {
-                    Log.e("MainActivity", "Failed to send FCM token: ${response.message}")
-                }
-            }
-        })
     }
 
     private fun startQRScanner() {
@@ -272,7 +226,6 @@ fun MainPage(onScanClick: () -> Unit) {
     }
 }
 
-// Activities
 @Composable
 fun Greeting(name: String) {
     Text(
