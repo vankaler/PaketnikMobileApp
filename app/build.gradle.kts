@@ -70,7 +70,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.activity:activity:1.9.0")
+    implementation("androidx.activity:activity-ktx:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-messaging-ktx:24.0.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
@@ -90,7 +90,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
-    implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("com.squareup.picasso:picasso:2.71828")
 
     // Api
@@ -108,6 +108,13 @@ dependencies {
     implementation ("androidx.camera:camera-video:1.3.3")
     implementation ("androidx.camera:camera-view:1.3.3")
     implementation("io.coil-kt:coil-compose:2.6.0")
+
+    // Navigation
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation ("androidx.compose.material3:material3:1.2.1")
 
 
     // Glide for image handling
