@@ -302,7 +302,12 @@ fun BottomBar() {
             Text("Login")
         }
 
-        // Add more buttons for more activities
+        Button(onClick = {
+            val intent = Intent(context, ProfileActivity::class.java)
+            context.startActivity(intent)
+        }) {
+            Text("Settings")
+        }
     }
 }
 
