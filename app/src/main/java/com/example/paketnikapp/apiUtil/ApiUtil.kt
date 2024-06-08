@@ -4,8 +4,8 @@ import android.util.Log
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,21 +13,23 @@ import java.io.File
 
 object ApiUtil {
 
-    private val retrofit: Retrofit = Retrofit.Builder()
+     private val BASE_URL = "http://" + serverIP + ":3001/" // Update with your server IP
 
-        .baseUrl("http://" + serverIP + ":3001/")
+    private val retrofit: Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
         .client(OkHttpClient.Builder().build())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     private val apiService: ApiService = retrofit.create(ApiService::class.java)
 
-    fun uploadVideo(videoFile: File, clientId: String, onSuccess: () -> Unit, onFailure: (Throwable) -> Unit) {
+    fun uploadVideo(videoFile: File, userId: RequestBody, onSuccess: () -> Unit, onFailure: (Throwable) -> Unit) {
         val requestFile = videoFile.asRequestBody("video/mp4".toMediaTypeOrNull())
         val videoPart = MultipartBody.Part.createFormData("video", videoFile.name, requestFile)
-        val clientIdPart = clientId.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val call = apiService.uploadVideo(videoPart, clientIdPart)
+        Log.d("ApiUtil", "Uploading video: ${videoFile.name}, Client ID: ${userId}") // Log upload details
+
+        val call = apiService.uploadVideo(videoPart, userId)
         call.enqueue(object : retrofit2.Callback<Void> {
             override fun onResponse(call: retrofit2.Call<Void>, response: retrofit2.Response<Void>) {
                 if (response.isSuccessful) {
@@ -46,6 +48,8 @@ object ApiUtil {
             }
         })
     }
+
+
 
     fun login(
         email: String,
@@ -104,7 +108,6 @@ object ApiUtil {
         })
     }
 
-
     fun logout(onSuccess: (ApiResponse) -> Unit, onFailure: (Throwable) -> Unit) {
         val call = apiService.logout()
         call.enqueue(object : retrofit2.Callback<ApiResponse> {
@@ -139,7 +142,6 @@ object ApiUtil {
                     onFailure(Exception("Logout failed: ${response.code()}"))
                 }
             }
-
 
             override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
                 onFailure(t)
@@ -293,4 +295,3 @@ object ApiUtil {
         })
     }
 }
-

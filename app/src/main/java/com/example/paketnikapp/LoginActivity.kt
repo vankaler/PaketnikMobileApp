@@ -1,7 +1,6 @@
 package com.example.paketnikapp
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -121,34 +120,27 @@ class LoginActivity : ComponentActivity() {
                 return@addOnCompleteListener
             }
 
-            // Get new FCM registration token
             val fcmToken = task.result
 
-            // Send login request with email, password, and FCM token
             ApiUtil.login(email, password, fcmToken, onSuccess = { response ->
                 val message = response.message ?: "Login successful"
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 if (response.success) {
-                    // Save login state and userId
-                    val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-                    sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
                     response.userId?.let { userId ->
-                        sharedPreferences.edit().putString("userId", userId).apply()
-                        // Log for debugging
-                        Log.d("LoginActivity", "Login successful, launching CameraActivity with userId")
+                        Log.d("LoginActivity", "Login successful, launching CameraActivity with userId: $userId")
 
-                        // Launch CameraActivity with userId
-                        val intent = Intent(this, CameraActivity::class.java)
-                        intent.putExtra("userId", userId)
+                        val intent = Intent(this, CameraActivity::class.java).apply {
+                            putExtra("userId", userId)
+                        }
                         startActivity(intent)
                         finish()
+                    } ?: run {
+                        Log.e("LoginActivity", "User ID is null after successful login")
                     }
                 }
             }, onFailure = { throwable ->
                 val message = throwable.message ?: "An error occurred"
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-
-                // Log for debugging
                 Log.d("LoginActivity", "Login failed: ${throwable.message}")
             })
         }

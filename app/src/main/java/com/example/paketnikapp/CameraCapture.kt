@@ -17,11 +17,17 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.example.paketnikapp.apiUtil.ApiUtil
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class CameraCapture(private val context: Context, private val lifecycleOwner: LifecycleOwner) {
+class CameraCapture(
+    private val context: Context,
+    private val lifecycleOwner: LifecycleOwner,
+    private val userId: String
+) {
     private var videoCapture: VideoCapture<Recorder>? = null
     private var recording: Recording? = null
     private lateinit var cameraExecutor: ExecutorService
@@ -65,7 +71,6 @@ class CameraCapture(private val context: Context, private val lifecycleOwner: Li
                 if (event is VideoRecordEvent.Finalize) {
                     if (!event.hasError()) {
                         onVideoSaved(videoFile)
-                        // Upload the video file after saving
                         uploadVideo(videoFile)
                     } else {
                         // Handle error
@@ -89,8 +94,8 @@ class CameraCapture(private val context: Context, private val lifecycleOwner: Li
     }
 
     private fun uploadVideo(videoFile: File) {
-        val clientId = "your_client_id" // Replace with actual client ID
-        ApiUtil.uploadVideo(videoFile, clientId, onSuccess = {
+        val clientIdPart = userId.toRequestBody("text/plain".toMediaTypeOrNull())
+        ApiUtil.uploadVideo(videoFile, clientIdPart, onSuccess = {
             // Handle successful upload
         }, onFailure = { throwable ->
             // Handle failure

@@ -1,6 +1,7 @@
 package com.example.paketnikapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,18 +22,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.paketnikapp.apiUtil.ApiUtil
 import com.example.paketnikapp.ui.theme.PaketnikAppTheme
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 class CameraActivity : ComponentActivity() {
     private lateinit var cameraCapture: CameraCapture
-    private var userId: String? = null
+    private lateinit var userId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        cameraCapture = CameraCapture(this, this)
+        userId = intent.getStringExtra("userId") ?: run {
+            Toast.makeText(this, "User ID not available", Toast.LENGTH_SHORT).show()
+            Log.e("CameraActivity", "User ID not found in Intent")
+            finish()
+            return
+        }
 
-        // Retrieve userId from intent
-        userId = intent.getStringExtra("userId")
+        cameraCapture = CameraCapture(this, this, userId)
 
         setContent {
             PaketnikAppTheme {
@@ -66,20 +73,17 @@ class CameraActivity : ComponentActivity() {
     }
 
     private fun uploadVideo(videoFile: File) {
-        userId?.let { userId ->
-            ApiUtil.uploadVideo(videoFile, userId, onSuccess = {
-                runOnUiThread {
-                    Toast.makeText(this, "Video uploaded successfully", Toast.LENGTH_SHORT).show()
-                }
-            }, onFailure = { throwable ->
-                runOnUiThread {
-                    Toast.makeText(this, "Failed to upload video: ${throwable.message}", Toast.LENGTH_SHORT).show()
-                }
-                throwable.printStackTrace()
-            })
-        } ?: run {
-            Toast.makeText(this, "User ID not available", Toast.LENGTH_SHORT).show()
-        }
+        val clientIdPart = userId.toRequestBody("text/plain".toMediaTypeOrNull())
+        ApiUtil.uploadVideo(videoFile, clientIdPart, onSuccess = {
+            runOnUiThread {
+                Toast.makeText(this, "Video uploaded successfully", Toast.LENGTH_SHORT).show()
+            }
+        }, onFailure = { throwable ->
+            runOnUiThread {
+                Toast.makeText(this, "Failed to upload video: ${throwable.message}", Toast.LENGTH_SHORT).show()
+            }
+            throwable.printStackTrace()
+        })
     }
 
     override fun onDestroy() {
