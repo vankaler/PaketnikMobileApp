@@ -127,7 +127,7 @@ class LoginActivity : ComponentActivity() {
         }
     }
 
-     fun sendTokenToServer(token: String, userId: String) {
+    fun sendTokenToServer(token: String, userId: String) {
         val client = OkHttpClient()
         val json = """
         {
