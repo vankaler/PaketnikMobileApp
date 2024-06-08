@@ -50,6 +50,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.paketnikapp.apiUtil.AccessPackageContractBody
 import com.example.paketnikapp.apiUtil.ApiUtil
+import com.example.paketnikapp.apiUtil.CreatePackageLogBody
 import com.example.paketnikapp.qr.QrScanActivity
 import com.example.paketnikapp.ui.theme.PaketnikAppTheme
 import okhttp3.Call
@@ -161,11 +162,24 @@ private fun openBox(boxId: String, context: Context) {
     val level = sharedPreferences.getInt("level", -1)
     val definiteId = id ?: ""
     val requestBody = AccessPackageContractBody(definiteId, splitBoxIdInt)
+
     ApiUtil.accessPackageContract(
         client = requestBody.client,
         code = requestBody.code,
         onSuccess = { responseBody ->
             if (JSONObject(responseBody.string()).getBoolean("result") || level == 3) {
+                val logBody = CreatePackageLogBody(splitBoxIdInt, definiteId, level == -1)
+                ApiUtil.createPackageLog(
+                    code = logBody.code,
+                    openedBy = logBody.openedBy,
+                    type = logBody.type,
+                    onSuccess = { responseBody ->
+                        Log.e("Response", responseBody.string())
+                    },
+                    onFailure = { throwable ->
+                        Log.e("Response", throwable.message ?: "Unknown error")
+                    }
+                )
                 val json = """
     {
         "deliveryId": 0,
