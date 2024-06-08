@@ -104,7 +104,6 @@ fun displayProfile(level: Int, id: String) {
                 Text(text = "ID: ${userId.value}", style = MaterialTheme.typography.bodyMedium)
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Add buttons for Package, Room, and Contracts
                 Button(
                     onClick = { /*TODO*/ },
                     modifier = Modifier.fillMaxWidth()
