@@ -13,7 +13,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -61,8 +60,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
-import okhttp3.RequestBody
-import java.io.File
 import java.io.IOException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -141,11 +138,18 @@ class LoginActivity : ComponentActivity() {
                     response.userId?.let { userId ->
                         Log.d("LoginActivity", "Login successful, launching CameraActivity with userId: $userId")
 
-                        val intent = Intent(this, CameraActivity::class.java).apply {
-                            putExtra("userId", userId)
+                        if(response.level != -1){
+                            val intent = Intent(this, CameraActivity::class.java).apply {
+                                putExtra("userId", userId)
+                            }
+                            startActivity(intent)
                         }
-                        startActivity(intent)
-                        finish()
+                        else{
+                            val intent = Intent(this, MainActivity::class.java).apply {
+                                putExtra("userId", userId)
+                            }
+                            startActivity(intent)
+                        }
                     } ?: run {
                         Log.e("LoginActivity", "User ID is null after successful login")
                     }
