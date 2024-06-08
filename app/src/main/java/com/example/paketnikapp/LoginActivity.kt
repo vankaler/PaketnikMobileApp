@@ -38,7 +38,6 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import android.util.Log
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import java.io.IOException
 
@@ -82,34 +81,45 @@ class LoginActivity : ComponentActivity() {
     }
 
     private fun performLogin(email: String, password: String) {
-        ApiUtil.login(email, password, onSuccess = { response ->
-            val message = response.message ?: "Login successful"
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-            if (response.success) {
-                // Save login state and userId
-                val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-                sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
-                response.userId?.let { userId ->
-                    sharedPreferences.edit().putString("userId", userId).apply()
-                    // Log for debugging
-                    Log.d("LoginActivity", "Login successful, launching MainActivity")
-
-                    // Send FCM token to server
-                    sendPushNotification(userId)
-
-                    // Launch MainActivity
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("LoginActivity", "Fetching FCM registration token failed", task.exception)
+                return@addOnCompleteListener
             }
-        }, onFailure = { throwable ->
-            val message = throwable.message ?: "An error occurred"
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
-            // Log for debugging
-            Log.d("LoginActivity", "Login failed: ${throwable.message}")
-        })
+            // Get new FCM registration token
+            val fcmToken = task.result
+
+            // Send login request with email, password, and FCM token
+            ApiUtil.login(email, password, fcmToken, onSuccess = { response ->
+                val message = response.message ?: "Login successful"
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                if (response.success) {
+                    // Save login state and userId
+                    val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+                    sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
+                    response.userId?.let { userId ->
+                        sharedPreferences.edit().putString("userId", userId).apply()
+                        // Log for debugging
+                        Log.d("LoginActivity", "Login successful, launching MainActivity")
+
+                        // Send FCM token to server
+                        sendPushNotification(userId)
+
+                        // Launch MainActivity
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+            }, onFailure = { throwable ->
+                val message = throwable.message ?: "An error occurred"
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+                // Log for debugging
+                Log.d("LoginActivity", "Login failed: ${throwable.message}")
+            })
+        }
     }
 
     private fun sendPushNotification(userId: String) {
@@ -127,7 +137,7 @@ class LoginActivity : ComponentActivity() {
         }
     }
 
-    fun sendTokenToServer(token: String, userId: String) {
+    private fun sendTokenToServer(token: String, userId: String) {
         val client = OkHttpClient()
         val json = """
         {

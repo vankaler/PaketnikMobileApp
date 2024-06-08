@@ -47,10 +47,11 @@ object ApiUtil {
     fun login(
         email: String,
         password: String,
+        fcmToken: String,
         onSuccess: (ApiResponse) -> Unit,
         onFailure: (Throwable) -> Unit
     ) {
-        val call = apiService.login(LoginRequest(email, password))
+        val call = apiService.login(LoginRequest(email, password, fcmToken))
         call.enqueue(object : retrofit2.Callback<ApiResponse> {
             override fun onResponse(
                 call: retrofit2.Call<ApiResponse>,

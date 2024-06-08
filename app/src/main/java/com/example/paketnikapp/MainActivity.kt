@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
 
         if (!isLoggedIn) {
             // Redirect to LoginActivity
-            val intent = Intent(this, InformationActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
             return
@@ -226,6 +226,7 @@ fun AppSurface(onScanClick: () -> Unit) {
 
 @Composable
 fun MainPage(onScanClick: () -> Unit) {
+    val context = LocalContext.current
     val pulseScale by rememberInfiniteTransition().animateFloat(
         initialValue = 0.75f,
         targetValue = 1f,
@@ -250,6 +251,17 @@ fun MainPage(onScanClick: () -> Unit) {
         ScanButton(pulseScale, onScanClick)
         Spacer(modifier = Modifier.height(32.dp))
         LogoutButton()
+
+        Spacer(modifier = Modifier.height(16.dp))
+        ActivityButton("Information Activity") {
+            val intent = Intent(context, InformationActivity::class.java)
+            context.startActivity(intent)
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        ActivityButton("Login Activity") {
+            val intent = Intent(context, LoginActivity::class.java)
+            context.startActivity(intent)
+        }
     }
 }
 
@@ -298,6 +310,16 @@ fun LogoutButton() {
         modifier = Modifier.fillMaxWidth()
     ) {
         Text("Logout")
+    }
+}
+
+@Composable
+fun ActivityButton(text: String, onClick: () -> Unit) {
+    Button(
+        onClick = { onClick() },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(text)
     }
 }
 

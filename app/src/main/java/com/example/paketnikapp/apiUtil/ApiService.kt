@@ -10,7 +10,7 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
 
-data class LoginRequest(val email: String, val password: String)
+data class LoginRequest(val email: String, val password: String, val fcmToken: String)
 data class RegisterRequest(
     val firstName: String,
     val lastName: String,
