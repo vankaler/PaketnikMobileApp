@@ -1,6 +1,7 @@
 package com.example.paketnikapp
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -12,6 +13,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -59,6 +61,8 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
+import okhttp3.RequestBody
+import java.io.File
 import java.io.IOException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -123,9 +127,17 @@ class LoginActivity : ComponentActivity() {
             val fcmToken = task.result
 
             ApiUtil.login(email, password, fcmToken, onSuccess = { response ->
+                // Log the user information
+
                 val message = response.message ?: "Login successful"
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 if (response.success) {
+
+                    // Save login state and userId
+                    val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+                    sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
+                    sharedPreferences.edit().putInt("level", response.level).apply()
+
                     response.userId?.let { userId ->
                         Log.d("LoginActivity", "Login successful, launching CameraActivity with userId: $userId")
 

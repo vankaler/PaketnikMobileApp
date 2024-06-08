@@ -51,6 +51,8 @@
         <activity android:name=".qr.QrScanActivity" />
         <activity android:name=".DatabaseManipulationActivity" />
         <activity android:name=".InformationActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".PackageActivity" />
 
         <!-- Firebase Messaging Service -->
         <service
