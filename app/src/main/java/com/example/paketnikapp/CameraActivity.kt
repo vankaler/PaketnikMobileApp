@@ -20,11 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.example.paketnikapp.apiUtil.ApiUtil
 import com.example.paketnikapp.ui.theme.PaketnikAppTheme
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.File
 
 class CameraActivity : ComponentActivity() {
     private lateinit var cameraCapture: CameraCapture
@@ -68,22 +64,7 @@ class CameraActivity : ComponentActivity() {
     private fun startVideoCapture() {
         cameraCapture.startVideoCapture { videoFile ->
             Toast.makeText(this, "Video saved: ${videoFile.absolutePath}", Toast.LENGTH_SHORT).show()
-            uploadVideo(videoFile)
         }
-    }
-
-    private fun uploadVideo(videoFile: File) {
-        val clientIdPart = userId.toRequestBody("text/plain".toMediaTypeOrNull())
-        ApiUtil.uploadVideo(videoFile, clientIdPart, onSuccess = {
-            runOnUiThread {
-                Toast.makeText(this, "Video uploaded successfully", Toast.LENGTH_SHORT).show()
-            }
-        }, onFailure = { throwable ->
-            runOnUiThread {
-                Toast.makeText(this, "Failed to upload video: ${throwable.message}", Toast.LENGTH_SHORT).show()
-            }
-            throwable.printStackTrace()
-        })
     }
 
     override fun onDestroy() {

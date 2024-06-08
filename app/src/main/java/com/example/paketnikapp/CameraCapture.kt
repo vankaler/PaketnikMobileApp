@@ -31,6 +31,7 @@ class CameraCapture(
     private var videoCapture: VideoCapture<Recorder>? = null
     private var recording: Recording? = null
     private lateinit var cameraExecutor: ExecutorService
+    private var isProcessing: Boolean = false
 
     init {
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -48,7 +49,7 @@ class CameraCapture(
                 .setQualitySelector(QualitySelector.from(Quality.HIGHEST))
                 .build())
 
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
 
             try {
                 cameraProvider.unbindAll()
@@ -62,6 +63,9 @@ class CameraCapture(
     }
 
     fun startVideoCapture(onVideoSaved: (File) -> Unit) {
+        if (isProcessing) return // Prevent multiple captures
+
+        isProcessing = true
         val videoFile = File(context.externalMediaDirs.first(), "${System.currentTimeMillis()}.mp4")
         val outputOptions = FileOutputOptions.Builder(videoFile).build()
 
@@ -73,6 +77,7 @@ class CameraCapture(
                         onVideoSaved(videoFile)
                         uploadVideo(videoFile)
                     } else {
+                        isProcessing = false
                         // Handle error
                     }
                 }
@@ -96,8 +101,9 @@ class CameraCapture(
     private fun uploadVideo(videoFile: File) {
         val clientIdPart = userId.toRequestBody("text/plain".toMediaTypeOrNull())
         ApiUtil.uploadVideo(videoFile, clientIdPart, onSuccess = {
-            // Handle successful upload
+            isProcessing = false // Reset flag on success
         }, onFailure = { throwable ->
+            isProcessing = false // Reset flag on failure
             // Handle failure
         })
     }
