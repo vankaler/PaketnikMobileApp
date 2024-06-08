@@ -1,24 +1,42 @@
 package com.example.paketnikapp
 
 import android.Manifest
-import okhttp3.*
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -26,30 +44,38 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import coil.compose.rememberImagePainter
 import com.example.paketnikapp.apiUtil.ApiUtil
 import com.example.paketnikapp.ui.theme.PaketnikAppTheme
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
-import java.io.File
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import java.io.IOException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import android.util.Log
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody
-import java.io.IOException
-
-import androidx.camera.camera2.Camera2Config
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
-import androidx.lifecycle.Lifecycle
 
 class LoginActivity : ComponentActivity() {
 
     lateinit var imageCapture: ImageCapture
     private lateinit var cameraExecutor: ExecutorService
+
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+        if (isGranted) {
+            startCameraActivity()
+        } else {
+            Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +90,7 @@ class LoginActivity : ComponentActivity() {
         setContent {
             PaketnikAppTheme {
                 LoginScreen(
-                    onFaceIdClick = { startCameraActivity() },
+                    onFaceIdClick = { checkCameraPermissionAndStart() },
                     onLoginClick = { email, password -> performLogin(email, password) },
                     onRegisterClick = {
                         val intent = Intent(this, RegisterActivity::class.java)
@@ -72,6 +98,14 @@ class LoginActivity : ComponentActivity() {
                     }
                 )
             }
+        }
+    }
+
+    private fun checkCameraPermissionAndStart() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            startCameraActivity()
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.CAMERA)
         }
     }
 
@@ -138,25 +172,24 @@ class LoginActivity : ComponentActivity() {
     }
 
     private fun sendTokenToServer(token: String, userId: String) {
-        val client = OkHttpClient()
         val json = """
         {
             "userId": "$userId",
             "fcmToken": "$token"
         }
-    """
-        val body = RequestBody.create("application/json; charset=utf-8".toMediaType(), json)
+        """
+        val body = json.toRequestBody("application/json; charset=utf-8".toMediaType())
         val request = Request.Builder()
             .url("http://10.0.2.2:3001/clients/register-fcm-token")
             .post(body)
             .build()
 
-        client.newCall(request).enqueue(object : Callback {
+        OkHttpClient().newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("LoginActivity", "Failed to send FCM token: ${e.message}")
             }
 
-            override fun onResponse(call: Call, response: okhttp3.Response) {
+            override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     Log.d("LoginActivity", "FCM token sent successfully")
                 } else {
@@ -178,25 +211,6 @@ class LoginActivity : ComponentActivity() {
         }
 
         permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-    }
-    private fun capturePhoto() {
-        val photoFile = File(externalMediaDirs.first(), "${System.currentTimeMillis()}.jpg")
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-
-        imageCapture.takePicture(
-            outputOptions,
-            ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onError(exception: ImageCaptureException) {
-                    Toast.makeText(this@LoginActivity, "Photo capture failed: ${exception.message}", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    Toast.makeText(this@LoginActivity, "Photo capture succeeded: ${photoFile.absolutePath}", Toast.LENGTH_SHORT).show()
-                    // Handle the captured photo as needed
-                }
-            }
-        )
     }
 
     override fun onDestroy() {
