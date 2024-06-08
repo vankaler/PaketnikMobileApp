@@ -48,6 +48,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.paketnikapp.apiUtil.AccessPackageContractBody
+import com.example.paketnikapp.apiUtil.ApiUtil
 import com.example.paketnikapp.qr.QrScanActivity
 import com.example.paketnikapp.ui.theme.PaketnikAppTheme
 import okhttp3.Call
@@ -152,7 +154,19 @@ private fun openBox(boxId: String, context: Context) {
     val splitBoxIdInt = splitBoxId.toInt()
     val qrCodeInfo = pathWithoutTrailingSlash
     Log.e("Request", "Split box ID: $splitBoxId")
-    val json = """
+
+
+    val sharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+    val id = sharedPreferences.getString("userId", "")
+    val level = sharedPreferences.getInt("level", -1)
+    val definiteId = id ?: ""
+    val requestBody = AccessPackageContractBody(definiteId, splitBoxIdInt)
+    ApiUtil.accessPackageContract(
+        client = requestBody.client,
+        code = requestBody.code,
+        onSuccess = { responseBody ->
+            if (JSONObject(responseBody.string()).getBoolean("result") || level == 3) {
+                val json = """
     {
         "deliveryId": 0,
         "boxId": $splitBoxIdInt,
@@ -166,48 +180,62 @@ private fun openBox(boxId: String, context: Context) {
         "addAccessLog": false
     }
     """
-    Log.e("Request", json)
-    val body = RequestBody.create("application/json; charset=utf-8".toMediaType(), json)
-    val request = Request.Builder()
-        .url("https://api-d4me-stage.direct4.me/sandbox/v1/Access/openbox")
-        .post(body)
-        .addHeader("Authorization", "Bearer 9ea96945-3a37-4638-a5d4-22e89fbc998f")
-        .build()
+                Log.e("Request", json)
+                val body = RequestBody.create("application/json; charset=utf-8".toMediaType(), json)
+                val request = Request.Builder()
+                    .url("https://api-d4me-stage.direct4.me/sandbox/v1/Access/openbox")
+                    .post(body)
+                    .addHeader("Authorization", "Bearer 9ea96945-3a37-4638-a5d4-22e89fbc998f")
+                    .build()
 
-    client.newCall(request).enqueue(object : Callback {
-        override fun onFailure(call: Call, e: IOException) {
-            Handler(Looper.getMainLooper()).post {
-                showMessage(context, "Failed to open box: ${e.message}")
-            }
-        }
-
-        override fun onResponse(call: Call, response: Response) {
-            if (!response.isSuccessful) {
-                Log.e("Response", "Request failed with status code: ${response.code}")
-                if (response.code == 400 && response.body != null) {
-                    Log.e("Response", "Response body: ${response.body!!.string()}")
-                }
-                Handler(Looper.getMainLooper()).post {
-                    showMessage(context, "Request failed with status code: ${response.code}")
-                }
-            } else {
-                response.body?.let { responseBody ->
-                    val responseBodyString = responseBody.string()
-                    if (responseBodyString.isNotBlank()) {
-                        Log.e("Response", responseBodyString)
-                        val responseData = JSONObject(responseBodyString)
-                        val base64Token = responseData.getString("data")
-                        playToken(base64Token, context)
-                    } else {
-                        Log.e("Response", "Response body is empty")
+                client.newCall(request).enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
                         Handler(Looper.getMainLooper()).post {
-                            showMessage(context, "Response body is empty")
+                            showMessage(context, "Failed to open box: ${e.message}")
                         }
                     }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        if (!response.isSuccessful) {
+                            Log.e("Response", "Request failed with status code: ${response.code}")
+                            if (response.code == 400 && response.body != null) {
+                                Log.e("Response", "Response body: ${response.body!!.string()}")
+                            }
+                            Handler(Looper.getMainLooper()).post {
+                                showMessage(
+                                    context,
+                                    "Request failed with status code: ${response.code}"
+                                )
+                            }
+                        } else {
+                            response.body?.let { responseBody ->
+                                val responseBodyString = responseBody.string()
+                                if (responseBodyString.isNotBlank()) {
+                                    Log.e("Response", responseBodyString)
+                                    val responseData = JSONObject(responseBodyString)
+                                    val base64Token = responseData.getString("data")
+                                    playToken(base64Token, context)
+                                } else {
+                                    Log.e("Response", "Response body is empty")
+                                    Handler(Looper.getMainLooper()).post {
+                                        showMessage(context, "Response body is empty")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+            }
+            else{
+                Handler(Looper.getMainLooper()).post {
+                    showMessage(context, "Unauthorized")
                 }
             }
+        },
+        onFailure = { throwable ->
+            Log.e("Response", throwable.message ?: "Unknown error")
         }
-    })
+    )
 }
 
 private fun playToken(base64Token: String, context: Context) {
@@ -271,7 +299,9 @@ fun MainPage(onScanClick: () -> Unit) {
     )
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
