@@ -5,6 +5,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,24 +22,26 @@ object ApiUtil {
 
     private val apiService: ApiService = retrofit.create(ApiService::class.java)
 
-    fun sendVideo(videoFile: File, onSuccess: () -> Unit, onFailure: (Throwable) -> Unit) {
+    fun uploadVideo(videoFile: File, clientId: String, onSuccess: () -> Unit, onFailure: (Throwable) -> Unit) {
         val requestFile = videoFile.asRequestBody("video/mp4".toMediaTypeOrNull())
-        val body = MultipartBody.Part.createFormData("video", videoFile.name, requestFile)
+        val videoPart = MultipartBody.Part.createFormData("video", videoFile.name, requestFile)
+        val clientIdPart = clientId.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val call = apiService.sendVideo(body)
+        val call = apiService.uploadVideo(videoPart, clientIdPart)
         call.enqueue(object : retrofit2.Callback<Void> {
-            override fun onResponse(
-                call: retrofit2.Call<Void>,
-                response: retrofit2.Response<Void>
-            ) {
+            override fun onResponse(call: retrofit2.Call<Void>, response: retrofit2.Response<Void>) {
                 if (response.isSuccessful) {
+                    Log.d("ApiUtil", "Video uploaded successfully")
                     onSuccess()
                 } else {
-                    onFailure(Exception("Failed to send video: ${response.code()}"))
+                    val errorMessage = "Failed to upload video: ${response.code()} - ${response.message()}"
+                    Log.e("ApiUtil", errorMessage)
+                    onFailure(Exception(errorMessage))
                 }
             }
 
             override fun onFailure(call: retrofit2.Call<Void>, t: Throwable) {
+                Log.e("ApiUtil", "Error uploading video", t)
                 onFailure(t)
             }
         })

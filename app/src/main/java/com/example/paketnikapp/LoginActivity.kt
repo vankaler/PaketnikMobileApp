@@ -135,13 +135,11 @@ class LoginActivity : ComponentActivity() {
                     response.userId?.let { userId ->
                         sharedPreferences.edit().putString("userId", userId).apply()
                         // Log for debugging
-                        Log.d("LoginActivity", "Login successful, launching MainActivity")
+                        Log.d("LoginActivity", "Login successful, launching CameraActivity with userId")
 
-                        // Send FCM token to server
-                        sendPushNotification(userId)
-
-                        // Launch MainActivity
-                        val intent = Intent(this, MainActivity::class.java)
+                        // Launch CameraActivity with userId
+                        val intent = Intent(this, CameraActivity::class.java)
+                        intent.putExtra("userId", userId)
                         startActivity(intent)
                         finish()
                     }
@@ -155,6 +153,7 @@ class LoginActivity : ComponentActivity() {
             })
         }
     }
+
 
     private fun sendPushNotification(userId: String) {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->

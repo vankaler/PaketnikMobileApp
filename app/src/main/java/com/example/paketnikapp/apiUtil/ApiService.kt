@@ -22,11 +22,15 @@ data class ApiResponse(
     val message: String?,
     val userId: String?
 )
+
 interface ApiService {
 
     @Multipart
-    @POST("video2fa/upload")
-    fun sendVideo(@Part video: MultipartBody.Part): Call<Void>
+    @POST("video2fa/upload-video")
+    fun uploadVideo(
+        @Part video: MultipartBody.Part,
+        @Part("clientId") clientId: okhttp3.RequestBody
+    ): Call<Void>
 
     @POST("clients/login")
     fun login(@Body request: LoginRequest): Call<ApiResponse>
@@ -45,17 +49,16 @@ interface ApiService {
 
     @GET("rooms")
     fun getAllRooms(): Call<ResponseBody>
+
     @GET("rooms/{id}")
     fun getRoomById(@Path("id") id: String): Call<ResponseBody>
 
     @GET("staff")
     fun getAllStaff(): Call<ResponseBody>
+
     @GET("staff/{id}")
     fun getStaffById(@Path("id") id: String): Call<ResponseBody>
 
     @GET("info")
     fun getAllInfo(): Call<ResponseBody>
-
 }
-
-

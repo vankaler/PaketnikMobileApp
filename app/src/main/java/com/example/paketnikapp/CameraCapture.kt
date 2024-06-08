@@ -89,7 +89,8 @@ class CameraCapture(private val context: Context, private val lifecycleOwner: Li
     }
 
     private fun uploadVideo(videoFile: File) {
-        ApiUtil.sendVideo(videoFile, onSuccess = {
+        val clientId = "your_client_id" // Replace with actual client ID
+        ApiUtil.uploadVideo(videoFile, clientId, onSuccess = {
             // Handle successful upload
         }, onFailure = { throwable ->
             // Handle failure
