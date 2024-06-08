@@ -110,12 +110,15 @@ class LoginActivity : ComponentActivity() {
 
             // Send login request with email, password, and FCM token
             ApiUtil.login(email, password, fcmToken, onSuccess = { response ->
+                // Log the user information
+
                 val message = response.message ?: "Login successful"
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 if (response.success) {
                     // Save login state and userId
                     val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
                     sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
+                    sharedPreferences.edit().putInt("level", response.level).apply()
                     response.userId?.let { userId ->
                         sharedPreferences.edit().putString("userId", userId).apply()
                         // Log for debugging

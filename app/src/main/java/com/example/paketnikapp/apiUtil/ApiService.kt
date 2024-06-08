@@ -20,7 +20,8 @@ data class RegisterRequest(
 data class ApiResponse(
     val success: Boolean,
     val message: String?,
-    val userId: String?
+    val userId: String?,
+    val level: Int
 )
 interface ApiService {
 
