@@ -58,6 +58,7 @@ class ProfileActivity : FragmentActivity() {
 
 @Composable
 fun displayProfile(level: Int, id: String) {
+    val context = LocalContext.current
     when(level){
         -1 -> {
             var name = remember { mutableStateOf("") }
@@ -105,7 +106,10 @@ fun displayProfile(level: Int, id: String) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        val intent = Intent(context, PackageActivity::class.java)
+                        context.startActivity(intent)
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Package")

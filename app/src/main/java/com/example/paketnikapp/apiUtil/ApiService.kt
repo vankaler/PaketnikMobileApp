@@ -70,4 +70,7 @@ interface ApiService {
 
     @GET("info")
     fun getAllInfo(): Call<ResponseBody>
+
+    @GET("packageLogs/{id}")
+    fun getPackageLogById(@Path("id") id: String): Call<ResponseBody>
 }

@@ -340,4 +340,30 @@ object ApiUtil {
             }
         })
     }
+
+    fun getPackageLogById(
+        id: String,
+        onSuccess: (ResponseBody) -> Unit,
+        onFailure: (Throwable) -> Unit
+    ) {
+        val call = apiService.getPackageLogById(id)
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(
+                call: retrofit2.Call<ResponseBody>,
+                response: retrofit2.Response<ResponseBody>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to get package log by id: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
 }
