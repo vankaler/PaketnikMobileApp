@@ -66,7 +66,6 @@ import android.util.Log
 import androidx.compose.ui.platform.LocalContext
 import com.google.firebase.messaging.FirebaseMessaging
 
-// test
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
