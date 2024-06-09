@@ -1,6 +1,7 @@
 package com.example.paketnikapp
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -123,17 +124,33 @@ class LoginActivity : ComponentActivity() {
             val fcmToken = task.result
 
             ApiUtil.login(email, password, fcmToken, onSuccess = { response ->
+                // Log the user information
+
                 val message = response.message ?: "Login successful"
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 if (response.success) {
+
+                    // Save login state and userId
+                    val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+                    sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
+                    sharedPreferences.edit().putString("userId", response.userId).apply()
+                    sharedPreferences.edit().putInt("level", response.level).apply()
+
                     response.userId?.let { userId ->
                         Log.d("LoginActivity", "Login successful, launching CameraActivity with userId: $userId")
 
-                        val intent = Intent(this, CameraActivity::class.java).apply {
-                            putExtra("userId", userId)
+                        if(response.level != -1){
+                            val intent = Intent(this, CameraActivity::class.java).apply {
+                                putExtra("userId", userId)
+                            }
+                            startActivity(intent)
                         }
-                        startActivity(intent)
-                        finish()
+                        else{
+                            val intent = Intent(this, MainActivity::class.java).apply {
+                                putExtra("userId", userId)
+                            }
+                            startActivity(intent)
+                        }
                     } ?: run {
                         Log.e("LoginActivity", "User ID is null after successful login")
                     }
