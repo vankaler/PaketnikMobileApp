@@ -12,6 +12,13 @@ import retrofit2.http.Part
 import retrofit2.http.Path
 
 data class LoginRequest(val email: String, val password: String, val fcmToken: String)
+data class AccessPackageContractBody(val client: String, val code: Int)
+
+data class CreatePackageLogBody(
+    val code: Int,
+    val openedBy: String,
+    val type: Boolean,
+)
 data class RegisterRequest(
     val firstName: String,
     val lastName: String,
@@ -21,7 +28,8 @@ data class RegisterRequest(
 data class ApiResponse(
     val success: Boolean,
     val message: String?,
-    val userId: String?
+    val userId: String?,
+    val level: Int
 )
 
 interface ApiService {
@@ -42,6 +50,11 @@ interface ApiService {
     @POST("clients/logout")
     fun logout(): Call<ApiResponse>
 
+    @POST("packageLogs")
+    fun createPackageLog(@Body request: CreatePackageLogBody): Call<ResponseBody>
+
+    @POST("packageContracts/access")
+    fun accessPackageContract(@Body request: AccessPackageContractBody): Call<ResponseBody>
     @GET("clients")
     fun getAllClients(): Call<ResponseBody>
 
@@ -62,4 +75,7 @@ interface ApiService {
 
     @GET("info")
     fun getAllInfo(): Call<ResponseBody>
+
+    @GET("packageLogs/{id}")
+    fun getPackageLogById(@Path("id") id: String): Call<ResponseBody>
 }

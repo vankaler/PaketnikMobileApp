@@ -294,4 +294,85 @@ object ApiUtil {
             }
         })
     }
+
+    fun accessPackageContract(
+        client: String,
+        code: Int,
+        onSuccess: (ResponseBody) -> Unit,
+        onFailure: (Throwable) -> Unit
+    ) {
+        val call = apiService.accessPackageContract(AccessPackageContractBody(client, code))
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(
+                call: retrofit2.Call<ResponseBody>,
+                response: retrofit2.Response<ResponseBody>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to access package contract: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
+    fun createPackageLog(
+        code: Int,
+        openedBy: String,
+        type: Boolean,
+        onSuccess: (ResponseBody) -> Unit,
+        onFailure: (Throwable) -> Unit
+    ) {
+        val call = apiService.createPackageLog(CreatePackageLogBody(code, openedBy, type))
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(
+                call: retrofit2.Call<ResponseBody>,
+                response: retrofit2.Response<ResponseBody>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to create package log: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
+    fun getPackageLogById(
+        id: String,
+        onSuccess: (ResponseBody) -> Unit,
+        onFailure: (Throwable) -> Unit
+    ) {
+        val call = apiService.getPackageLogById(id)
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(
+                call: retrofit2.Call<ResponseBody>,
+                response: retrofit2.Response<ResponseBody>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to get package log by id: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
 }
