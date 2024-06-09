@@ -133,6 +133,7 @@ class LoginActivity : ComponentActivity() {
                     // Save login state and userId
                     val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
                     sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
+                    sharedPreferences.edit().putString("userId", response.userId).apply()
                     sharedPreferences.edit().putInt("level", response.level).apply()
 
                     response.userId?.let { userId ->
