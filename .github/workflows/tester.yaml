@@ -7,8 +7,7 @@ on:
 
 jobs:
   build:
-
-    runs-on: self-hoasted
+    runs-on: self-hosted
 
     steps:
     - name: Checkout code
