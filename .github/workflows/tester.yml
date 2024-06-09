@@ -3,21 +3,32 @@ name: Gradle Build and Test
 on:
   push:
     branches:
-      - master
+      - workflow
 
 jobs:
   build:
-
     runs-on: self-hosted
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up JDK 11
+    - name: Set up JDK 17
       uses: actions/setup-java@v2
       with:
-        java-version: 11
+        distribution: 'adopt' # Specify the distribution of the JDK
+        java-version: '17'
+
+    - name: Set up Android SDK
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openjdk-17-jdk wget unzip
+        wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
+        unzip commandlinetools.zip -d cmdline-tools
+        mkdir -p $ANDROID_HOME/cmdline-tools/latest
+        mv cmdline-tools/cmdline-tools/* $ANDROID_HOME/cmdline-tools/latest/
+        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
     - name: Cache Gradle packages
       uses: actions/cache@v2
@@ -42,3 +53,4 @@ jobs:
       with:
         name: success-marker
         path: success.txt
+
