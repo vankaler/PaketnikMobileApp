@@ -1,6 +1,7 @@
 package com.example.paketnikapp
 
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import androidx.camera.core.CameraSelector
@@ -57,13 +58,12 @@ class CameraCapture(
                     lifecycleOwner, cameraSelector, preview, videoCapture
                 )
             } catch (exc: Exception) {
-                // Handle exception
             }
         }, ContextCompat.getMainExecutor(context))
     }
 
     fun startVideoCapture(onVideoSaved: (File) -> Unit) {
-        if (isProcessing) return // Prevent multiple captures
+        if (isProcessing) return
 
         isProcessing = true
         val videoFile = File(context.externalMediaDirs.first(), "${System.currentTimeMillis()}.mp4")
@@ -78,12 +78,10 @@ class CameraCapture(
                         uploadVideo(videoFile)
                     } else {
                         isProcessing = false
-                        // Handle error
                     }
                 }
             }
 
-        // Stop recording after 3 seconds
         Handler(Looper.getMainLooper()).postDelayed({
             stopVideoCapture()
         }, 3000)
@@ -101,10 +99,15 @@ class CameraCapture(
     private fun uploadVideo(videoFile: File) {
         val clientIdPart = userId.toRequestBody("text/plain".toMediaTypeOrNull())
         ApiUtil.uploadVideo(videoFile, clientIdPart, onSuccess = {
-            isProcessing = false // Reset flag on success
+            isProcessing = false
+            val intent = Intent(context, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            context.startActivity(intent)
         }, onFailure = { throwable ->
-            isProcessing = false // Reset flag on failure
-            // Handle failure
+            isProcessing = false
+            val intent = Intent(context, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            context.startActivity(intent)
         })
     }
 }
