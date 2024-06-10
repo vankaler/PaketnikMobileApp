@@ -10,14 +10,21 @@ import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import java.util.concurrent.TimeUnit
 
 object ApiUtil {
 
      private val BASE_URL = "http://" + serverIP + ":3001/" // Update with your server IP
 
+    private val httpClient = OkHttpClient.Builder()
+        .connectTimeout(160, TimeUnit.SECONDS)
+        .readTimeout(160, TimeUnit.SECONDS)
+        .writeTimeout(160, TimeUnit.SECONDS)
+        .build()
+
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .client(OkHttpClient.Builder().build())
+        .client(httpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -27,7 +34,7 @@ object ApiUtil {
         val requestFile = videoFile.asRequestBody("video/mp4".toMediaTypeOrNull())
         val videoPart = MultipartBody.Part.createFormData("video", videoFile.name, requestFile)
 
-        Log.d("ApiUtil", "Uploading video: ${videoFile.name}, Client ID: ${userId}") // Log upload details
+        Log.d("ApiUtil", "Uploading video: ${videoFile.name}, Client ID: ${userId}")
 
         val call = apiService.uploadVideo(videoPart, userId)
         call.enqueue(object : retrofit2.Callback<Void> {
@@ -48,8 +55,6 @@ object ApiUtil {
             }
         })
     }
-
-
 
     fun login(
         email: String,
