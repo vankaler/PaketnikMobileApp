@@ -144,13 +144,6 @@ fun displayProfile(level: Int, id: String) {
                 ) {
                     Text("Room")
                 }
-                Spacer(modifier = Modifier.height(16.dp))
-                OutlinedButton(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Contracts")
-                }
             }
         }
         3 -> {
