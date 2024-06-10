@@ -1,19 +1,4 @@
-# Gradle build stage
-FROM gradle:6.7.1-jdk11 AS build
-
-WORKDIR /app
-
-COPY . .
-
-RUN gradle build --no-daemon
-
-# Runtime stage
-FROM openjdk:11-jre-slim
-
-WORKDIR /app
-
-COPY --from=build /app/build/libs/*.jar app.jar
-
-EXPOSE 3002
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+FROM nginx:stable
+ADD /build/outputs/bundle/release /app
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app /usr/share/nginx/html
