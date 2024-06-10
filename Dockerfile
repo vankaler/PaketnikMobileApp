@@ -1,3 +1,3 @@
 FROM nginx:stable
-ADD /build/outputs/bundle/release /app
-COPY /app /usr/share/nginx/html
+ADD /app/build/outputs/bundle/release /temp
+COPY /temp /usr/share/nginx/html
