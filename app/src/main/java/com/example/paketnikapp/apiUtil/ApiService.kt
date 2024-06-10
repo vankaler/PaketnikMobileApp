@@ -78,4 +78,7 @@ interface ApiService {
 
     @GET("packageLogs/{id}")
     fun getPackageLogById(@Path("id") id: String): Call<ResponseBody>
+
+    @GET("clientHasRooms/{clientId}")
+    fun getClientHasRoomsById(@Path("clientId") clientId: String): Call<ResponseBody>
 }

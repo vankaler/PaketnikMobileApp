@@ -375,4 +375,30 @@ object ApiUtil {
             }
         })
     }
+
+    fun getClientHasRoomsById(
+        clientId: String,
+        onSuccess: (ResponseBody) -> Unit,
+        onFailure: (Throwable) -> Unit
+    ) {
+        val call = apiService.getClientHasRoomsById(clientId)
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(
+                call: retrofit2.Call<ResponseBody>,
+                response: retrofit2.Response<ResponseBody>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        onSuccess(it)
+                    } ?: onFailure(Exception("Empty response body"))
+                } else {
+                    onFailure(Exception("Failed to get client has rooms by id: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
 }

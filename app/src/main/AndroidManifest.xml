@@ -53,6 +53,7 @@
         <activity android:name=".InformationActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".PackageActivity" />
+        <activity android:name=".RoomActivity" />
 
         <!-- Firebase Messaging Service -->
         <service

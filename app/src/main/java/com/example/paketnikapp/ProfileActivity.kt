@@ -137,7 +137,9 @@ fun displayProfile(level: Int, id: String) {
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 OutlinedButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        val intent = Intent(context, RoomActivity::class.java)
+                        context.startActivity(intent) },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Room")
