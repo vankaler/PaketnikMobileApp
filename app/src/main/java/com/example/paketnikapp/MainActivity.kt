@@ -8,15 +8,12 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Base64
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material3.*
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -26,26 +23,35 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Logout
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -54,17 +60,18 @@ import com.example.paketnikapp.apiUtil.ApiUtil
 import com.example.paketnikapp.apiUtil.CreatePackageLogBody
 import com.example.paketnikapp.qr.QrScanActivity
 import com.example.paketnikapp.ui.theme.PaketnikAppTheme
-import androidx.compose.animation.core.*
-import okhttp3.*
+import com.google.firebase.messaging.FirebaseMessaging
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.Response
 import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import android.util.Base64
-import android.util.Log
-import androidx.compose.ui.platform.LocalContext
-import com.google.firebase.messaging.FirebaseMessaging
 
 
 class MainActivity : ComponentActivity() {
@@ -91,7 +98,7 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            PaketnikAppTheme {
+            CompositionLocalProvider {
                 Scaffold(
                     bottomBar = { BottomBar() }
                 ) { paddingValues ->
@@ -375,17 +382,6 @@ fun MainPage(onScanClick: () -> Unit) {
         ScanButton(pulseScale, onScanClick)
         Spacer(modifier = Modifier.height(32.dp))
         LogoutButton()
-
-        Spacer(modifier = Modifier.height(16.dp))
-        ActivityButton("Information Activity") {
-            val intent = Intent(context, InformationActivity::class.java)
-            context.startActivity(intent)
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        ActivityButton("Login Activity") {
-            val intent = Intent(context, LoginActivity::class.java)
-            context.startActivity(intent)
-        }
     }
 }
 
@@ -393,25 +389,61 @@ fun MainPage(onScanClick: () -> Unit) {
 fun BottomBar() {
     val context = LocalContext.current
     BottomAppBar {
-        Button(onClick = {
-            val intent = Intent(context, InformationActivity::class.java)
-            context.startActivity(intent)
-        }) {
-            Text("Information")
-        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            IconButton(
+                onClick = {
+                    val intent = Intent(context, InformationActivity::class.java)
+                    context.startActivity(intent)
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = "Home"
+                )
+            }
 
-        Button(onClick = {
-            val intent = Intent(context, LoginActivity::class.java)
-            context.startActivity(intent)
-        }) {
-            Text("Login")
-        }
+            IconButton(
+                onClick = {
+                    val sharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+                    sharedPreferences.edit().clear().apply()
+                    Toast.makeText(context, "Logged out successfully", Toast.LENGTH_SHORT).show()
 
-        Button(onClick = {
-            val intent = Intent(context, ProfileActivity::class.java)
-            context.startActivity(intent)
-        }) {
-            Text("Settings")
+                    val intent = Intent(context, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    context.startActivity(intent)
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.Logout,
+                    contentDescription = "Logout"
+                )
+            }
+
+            IconButton(
+                onClick = {},
+                enabled = false
+            ) {
+                Icon(
+                    imageVector = Icons.Default.QrCodeScanner,
+                    contentDescription = "QR Scan"
+                )
+            }
+
+            IconButton(
+                onClick = {
+                    val intent = Intent(context, ProfileActivity::class.java)
+                    context.startActivity(intent)
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = "Profile"
+                )
+            }
+
         }
     }
 }
@@ -447,21 +479,7 @@ fun ScanButton(pulseScale: Float, onScanClick: () -> Unit) {
 
 @Composable
 fun LogoutButton() {
-    val context = LocalContext.current
-    Button(
-        onClick = {
-            val sharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-            sharedPreferences.edit().clear().apply()
-            Toast.makeText(context, "Logged out successfully", Toast.LENGTH_SHORT).show()
 
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            context.startActivity(intent)
-        },
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Text("Logout")
-    }
 }
 
 @Composable
