@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiUtil {
 
-     private val BASE_URL = "http://" + serverIP + ":3001/" // Update with your server IP
+     private val BASE_URL = "http://" + serverIP + ":3005/" // Update with your server IP
 
     private val httpClient = OkHttpClient.Builder()
         .connectTimeout(160, TimeUnit.SECONDS)
