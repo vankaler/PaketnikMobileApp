@@ -1,6 +1,7 @@
 package com.example.paketnikapp.apiUtil
 
 import android.util.Log
+import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiUtil {
 
-     private val BASE_URL = "http://" + serverIP + ":3005/" // Update with your server IP
+    private val BASE_URL = "http://" + serverIP + ":3005/" // Update with your server IP
 
     private val httpClient = OkHttpClient.Builder()
         .connectTimeout(160, TimeUnit.SECONDS)
@@ -63,12 +64,14 @@ object ApiUtil {
         onSuccess: (ApiResponse) -> Unit,
         onFailure: (Throwable) -> Unit
     ) {
-        val call = apiService.login(LoginRequest(email, password, fcmToken))
+        val call = apiService.login(LoginWebRequest(email, password))
         call.enqueue(object : retrofit2.Callback<ApiResponse> {
             override fun onResponse(
                 call: retrofit2.Call<ApiResponse>,
                 response: retrofit2.Response<ApiResponse>
             ) {
+                Log.d("RES", response.toString())
+
                 if (response.isSuccessful) {
                     response.body()?.let {
                         onSuccess(it)

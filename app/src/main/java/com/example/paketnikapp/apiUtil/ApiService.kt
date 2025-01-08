@@ -12,6 +12,7 @@ import retrofit2.http.Part
 import retrofit2.http.Path
 
 data class LoginRequest(val email: String, val password: String, val fcmToken: String)
+data class LoginWebRequest(val email: String, val password: String)
 data class AccessPackageContractBody(val client: String, val code: Int)
 
 data class CreatePackageLogBody(
@@ -42,7 +43,10 @@ interface ApiService {
     ): Call<Void>
 
     @POST("clients/login")
-    fun login(@Body request: LoginRequest): Call<ApiResponse>
+    fun login(@Body request: LoginWebRequest): Call<ApiResponse>
+
+    @POST("clients/login-web")
+    fun loginWeb(@Body request: LoginWebRequest): Call<ApiResponse>
 
     @POST("clients")
     fun register(@Body request: RegisterRequest): Call<ApiResponse>
