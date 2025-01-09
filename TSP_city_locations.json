@@ -1,0 +1,820 @@
+[
+    {
+        "Mesto": "Ajdovščina",
+        "Naslov": "Goriška cesta 24",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 5270
+    },
+    {
+        "Mesto": "Benedikt",
+        "Naslov": "Čolnikov trg 9",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2234
+    },
+    {
+        "Mesto": "Bled",
+        "Naslov": "Ljubljanska cesta 10",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4260
+    },
+    {
+        "Mesto": "Bohinjska Bistrica",
+        "Naslov": "Trg svobode 2 C",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4264
+    },
+    {
+        "Mesto": "Borovnica",
+        "Naslov": "Molkov trg 12",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1353
+    },
+    {
+        "Mesto": "Bresternica",
+        "Naslov": "Obrobna ulica 1",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2354
+    },
+    {
+        "Mesto": "Brezovica pri Ljubljani",
+        "Naslov": "Podpeška cesta 20",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1351
+    },
+    {
+        "Mesto": "Brežice",
+        "Naslov": "Ulica stare pravde 34",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 8250
+    },
+    {
+        "Mesto": "Celje",
+        "Naslov": "Krekov trg 9",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 3101
+    },
+    {
+        "Mesto": "Črenšovci",
+        "Naslov": "Ulica Prekmurske čete 14",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 9232
+    },
+    {
+        "Mesto": "Črna na Koroškem",
+        "Naslov": "Center 16",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2393
+    },
+    {
+        "Mesto": "Črnomelj",
+        "Naslov": " Kolodvorska cesta 30 A",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 8340
+    },
+    {
+        "Mesto": "Dob",
+        "Naslov": "Krtina 144",
+        "Opis lokacije": "Bar Rožmarinka",
+        "Število paketnikov": 3,
+        "Izročilna pošta": 1233
+    },
+    {
+        "Mesto": "Dobova",
+        "Naslov": "Ulica bratov Gerjovičev 52",
+        "Opis lokacije": "Ob nekdanji poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 8257
+    },
+    {
+        "Mesto": "Dravograd",
+        "Naslov": "Trg 4. julija 1 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2370
+    },
+    {
+        "Mesto": "Gorišnica",
+        "Naslov": "Gorišnica 79 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 2272
+    },
+    {
+        "Mesto": "Gornja Radgona",
+        "Naslov": "Cesta na Stadion 1 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 9250
+    },
+    {
+        "Mesto": "Gornji Grad",
+        "Naslov": "Podsmrečje 20",
+        "Opis lokacije": "Mercator",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 3342
+    },
+    {
+        "Mesto": "Gornji Grad",
+        "Naslov": "Attemsov trg 8",
+        "Opis lokacije": "Poslovni objekt",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 3342
+    },
+    {
+        "Mesto": "Grosuplje",
+        "Naslov": "Partizanska cesta 7 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 1290
+    },
+    {
+        "Mesto": "Idrija",
+        "Naslov": "Vodnikova ulica 1 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 5280
+    },
+    {
+        "Mesto": "Ivančna Gorica",
+        "Naslov": "Ploščad Osvobodilne fronte 4 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1295
+    },
+    {
+        "Mesto": "Ivanjkovci",
+        "Naslov": "Ivanjkovci 9 B",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 1,
+        "Izročilna pošta": 2259
+    },
+    {
+        "Mesto": "Izola/Isola",
+        "Naslov": "Cankarjev drevored 1 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 8,
+        "Izročilna pošta": 6310
+    },
+    {
+        "Mesto": "Jesenice",
+        "Naslov": "Cesta Cirila Tavčarja 8 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4271
+    },
+    {
+        "Mesto": "Jesenice na Dolenjskem",
+        "Naslov": "Jesenice 9 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 8261
+    },
+    {
+        "Mesto": "Kamnica",
+        "Naslov": "Cesta v Rošpoh 18 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 2351
+    },
+    {
+        "Mesto": "Kamnik",
+        "Naslov": "Ljubljanska cesta 14 A",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 1241
+    },
+    {
+        "Mesto": "Kidričevo",
+        "Naslov": "Kopališka ulica 2 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2325
+    },
+    {
+        "Mesto": "Kobilje",
+        "Naslov": " Kobilje 30",
+        "Opis lokacije": "Občina Kobilje",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 9227
+    },
+    {
+        "Mesto": "Kočevje",
+        "Naslov": "Ljubljanska cesta 23 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 1330
+    },
+    {
+        "Mesto": "Komenda",
+        "Naslov": "Glavarjeva cesta 39 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1218
+    },
+    {
+        "Mesto": "Koper",
+        "Naslov": "Kolodvorska cesta 9 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 6104
+    },
+    {
+        "Mesto": "Kranj",
+        "Naslov": "Dražgoška ulica 8 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 4101
+    },
+    {
+        "Mesto": "Kranj",
+        "Naslov": "Škofjeloška cesta 17",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4103
+    },
+    {
+        "Mesto": "Kranj",
+        "Naslov": "Jezerska cesta 41 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4104
+    },
+    {
+        "Mesto": "Kranj",
+        "Naslov": "Ulica Lojzeta Hrovata 2 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 4105
+    },
+    {
+        "Mesto": "Kranjska Gora",
+        "Naslov": "Borovška cesta 92 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 4280
+    },
+    {
+        "Mesto": "Krško",
+        "Naslov": "Trg Matije Gubca 1 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 8271
+    },
+    {
+        "Mesto": "Lenart v Slovenskih goricah",
+        "Naslov": "Partizanska cesta 3 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2230
+    },
+    {
+        "Mesto": "Lendava/Lendva",
+        "Naslov": "Trg ljudske pravice 7 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 9220
+    },
+    {
+        "Mesto": "Lesce",
+        "Naslov": "Alpska cesta 37 B",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4248
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Poljanski nasip 30 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1104
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Pražakova ulica 3 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 1106
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Zaloška cesta 57 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1110
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": " Dunajska cesta 141 ",
+        "Opis lokacije": "Gostilnica Vinka",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1113
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Riharjeva ulica 38",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 1115
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Vodnikova cesta 235 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 1117
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Resljeva cesta 14 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 1124
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Letališka cesta 12",
+        "Opis lokacije": "1A Avto Letališka",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 1122
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Tacenska cesta 94",
+        "Opis lokacije": "As Mlakar Tacen Lj. ",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1133
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Hrvaška ulica 8",
+        "Opis lokacije": "Center Desetka",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1122
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Ob železnici 22",
+        "Opis lokacije": "Direct4me HQ",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1110
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Hranilniška ulica 1",
+        "Opis lokacije": " Gostilna Raubar",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 1116
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Dunajska cesta 145",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1113
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Litijska cesta 140",
+        "Opis lokacije": "Hayat Market Litijska",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1119
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Tehnološki park 22a",
+        "Opis lokacije": "Tehnološki park Ljubljana",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 1125
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": " Tržaška cesta 89",
+        "Opis lokacije": "Vulkanizerstvo Pečar Tržaška",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 1111
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Cesta dveh cesarjev 73",
+        "Opis lokacije": "Petrol Barje - jug",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1123
+    },
+    {
+        "Mesto": "Ljubljana",
+        "Naslov": "Cesta dveh cesarjev 71",
+        "Opis lokacije": "Petrol Barje - sever",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 1123
+    },
+    {
+        "Mesto": "Ljubljana - Črnuče",
+        "Naslov": "Dunajska cesta 361 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1231
+    },
+    {
+        "Mesto": "Ljubljana - Polje",
+        "Naslov": "Zadobrovška cesta 14 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1260
+    },
+    {
+        "Mesto": " Ljubljana - Šentvid",
+        "Naslov": "Prušnikova ulica 2 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 1210
+    },
+    {
+        "Mesto": "Makole",
+        "Naslov": "Makole 37 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2321
+    },
+    {
+        "Mesto": "Malečnik",
+        "Naslov": "Malečnik 56 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 2229
+    },
+    {
+        "Mesto": "Maribor",
+        "Naslov": "Istrska ulica 49 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2104
+    },
+    {
+        "Mesto": "Maribor",
+        "Naslov": "Šarhova ulica 59 A",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov":6,
+        "Izročilna pošta": 2106
+    },
+    {
+        "Mesto": "Maribor",
+        "Naslov": "Gosposvetska cesta 84",
+        "Opis lokacije": " PC Meltal - parkirišče",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 2101
+    },
+    {
+        "Mesto": "Maribor",
+        "Naslov": "Tyrševa ulica 23",
+        "Opis lokacije": "Študentski domovi Maribor DOM 1",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 2101
+    },
+    {
+        "Mesto": "Maribor",
+        "Naslov": "Gosposvetska cesta 83",
+        "Opis lokacije": "Študentski domovi Maribor DOM 7",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2101
+    },
+    {
+        "Mesto": "Mengeš",
+        "Naslov": "Trdinov trg 8 A",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1234
+    },
+    {
+        "Mesto": "Metlika",
+        "Naslov": "Naselje Borisa Kidriča 2 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 8330
+    },
+    {
+        "Mesto": "Mirna",
+        "Naslov": "Cesta na Fužine 3 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 8233
+    },
+    {
+        "Mesto": "Moravče",
+        "Naslov": "Vegova ulica 1 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 1251
+    },
+    {
+        "Mesto": "Mozirje",
+        "Naslov": " Savinjska cesta 3",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 3330
+    },
+    {
+        "Mesto": "Murska Sobota",
+        "Naslov": "Trg Zmage 6",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 9101
+    },
+    {
+        "Mesto": "Murska Sobota",
+        "Naslov": "Ulica Štefana Kovača 43",
+        "Opis lokacije": "Maximus Murska sobota",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 9101
+    },
+    {
+        "Mesto": "Muta",
+        "Naslov": "Glavni trg 31 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 2366
+    },
+    {
+        "Mesto": "Naklo",
+        "Naslov": "Glavna cesta 24 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4202
+    },
+    {
+        "Mesto": "Nova Gorica",
+        "Naslov": "Kidričeva ulica 19 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 5101
+    },
+    {
+        "Mesto": "Nova Gorica",
+        "Naslov": "Industrijska cesta 9",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 5102
+    },
+    {
+        "Mesto": "Novo mesto",
+        "Naslov": "Ulica Slavka Gruma 7",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 8102
+    },
+    {
+        "Mesto": "Novo mesto",
+        "Naslov": "Novi trg 7 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 8105
+    },
+    {
+        "Mesto": "Ormož",
+        "Naslov": "Poštna ulica 2 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 2270
+    },
+    {
+        "Mesto": "Petrovci",
+        "Naslov": "Gornji Petrovci 40 E",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 9203
+    },
+    {
+        "Mesto": "Polzela",
+        "Naslov": "Malteška cesta 38",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 9203
+    },
+    {
+        "Mesto": "Postojna",
+        "Naslov": "Ulica 1. maja 2 A",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 6230
+    },
+    {
+        "Mesto": "Preddvor",
+        "Naslov": "Šiška 1",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4205
+    },
+    {
+        "Mesto": "Prevalje",
+        "Naslov": " Trg 32 A",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 2391
+    },
+    {
+        "Mesto": "Ptuj",
+        "Naslov": "Mariborska Cesta 19",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 2251
+    },
+    {
+        "Mesto": "Rače",
+        "Naslov": "Ljubljanska cesta 14 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2327
+    },
+    {
+        "Mesto": "Radenci",
+        "Naslov": "Panonska cesta 5 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 9252
+    },
+    {
+        "Mesto": " Ravne na Koroškem",
+        "Naslov": "Trg svobode 19 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2390
+    },
+    {
+        "Mesto": "Ribnica",
+        "Naslov": "Kolodvorska ulica 2 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1310
+    },
+    {
+        "Mesto": " Selnica ob Dravi",
+        "Naslov": "Slovenski trg 4",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 2352
+    },
+    {
+        "Mesto": "Sevnica",
+        "Naslov": "Trg svobode 9",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 8290
+    },
+    {
+        "Mesto": "Sežana",
+        "Naslov": "Partizanska cesta 48 A",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 6210
+    },
+    {
+        "Mesto": "Slovenj Gradec",
+        "Naslov": "Kidričeva ulica 3a",
+        "Opis lokacije": "Kivi Com Slovenj Gradec",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 2380
+    },
+    {
+        "Mesto": " Spodnji Duplek",
+        "Naslov": "Cesta k Dravi 5",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2241
+    },
+    {
+        "Mesto": "Šempeter pri Gorici",
+        "Naslov": "Vrtojbenska cesta 19 C",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 5290
+    },
+    {
+        "Mesto": "Šenčur",
+        "Naslov": "Gasilska cesta 2 A",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4208
+    },
+    {
+        "Mesto": "Šentjernej",
+        "Naslov": "Prvomajska cesta 3",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 8310
+    },    {
+        "Mesto": "Šentjur",
+        "Naslov": "Mestni trg 5a",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 3230
+    },    {
+        "Mesto": "Škofja Loka",
+        "Naslov": "Kapucinski trg 14 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4221
+    },    {
+        "Mesto": "Šmarje pri Jelšah",
+        "Naslov": "Aškerčev trg 26 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 3240
+    },    {
+        "Mesto": "Tolmin",
+        "Naslov": "Trg maršala Tita 10 C",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 5220
+    },    {
+        "Mesto": "Trbovlje",
+        "Naslov": "Trg revolucije 27",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1420
+    },    {
+        "Mesto": "Trbovlje",
+        "Naslov": "Trg Franca Fakina 4 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1422
+    },    {
+        "Mesto": "Trebnje",
+        "Naslov": "Goliev trg 11 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 8210
+    },    {
+        "Mesto": "Tržič",
+        "Naslov": " Predilniška cesta 10 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4290
+    },    {
+        "Mesto": "Velenje",
+        "Naslov": " Kidričeva cesta 2a ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 6,
+        "Izročilna pošta": 3320
+    },    {
+        "Mesto": "Vrhnika",
+        "Naslov": "Poštna ulica 2",
+        "Opis lokacije": "Kulturni center Vrhnika",
+        "Število paketnikov": 15,
+        "Izročilna pošta": 1360
+    },    
+    {
+        "Mesto": "Vrhnika",
+        "Naslov": "Tržaška cesta 32",
+        "Opis lokacije": "Kulturni center Vrhnika",
+        "Število paketnikov": 15,
+        "Izročilna pošta": 1360
+    },
+    {
+        "Mesto": "Zagorje ob Savi",
+        "Naslov": "Cesta zmage 28",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 1360
+    },    {
+        "Mesto": "Zgornja Polskava",
+        "Naslov": "Mariborska ulica 26",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 2,
+        "Izročilna pošta": 2314
+    },    {
+        "Mesto": "Žalec",
+        "Naslov": "Ulica heroja Staneta 1 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 3310
+    },    {
+        "Mesto": "Železniki",
+        "Naslov": "Na Kresu 1",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4228
+    },    {
+        "Mesto": "Žiri",
+        "Naslov": "Trg svobode 1 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4226
+    },    {
+        "Mesto": "Žirovnica",
+        "Naslov": "Žirovnica 4 ",
+        "Opis lokacije": "Ob poštni poslovalnici",
+        "Število paketnikov": 4,
+        "Izročilna pošta": 4274
+    } 
+]
