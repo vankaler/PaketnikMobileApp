@@ -54,6 +54,8 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".PackageActivity" />
         <activity android:name=".RoomActivity" />
+        <activity android:name=".CitySelectionActivity" />
+        <activity android:name=".SelectedCitiesActivity" />
 
         <!-- Firebase Messaging Service -->
         <service

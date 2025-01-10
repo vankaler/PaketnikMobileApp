@@ -128,6 +128,17 @@ fun displayProfile(level: Int, id: String) {
 
                 OutlinedButton(
                     onClick = {
+                        val intent = Intent(context, CitySelectionActivity::class.java)
+                        context.startActivity(intent)
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Select Cities")
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+                OutlinedButton(
+                    onClick = {
                         val intent = Intent(context, PackageActivity::class.java)
                         context.startActivity(intent)
                     },
