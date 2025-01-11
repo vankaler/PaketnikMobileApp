@@ -15,6 +15,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.paketnikapp.model.City
@@ -27,28 +28,55 @@ fun SelectedCitiesScreen(
     onCalculatePath: () -> Unit
 ) {
     Column(modifier = Modifier.padding(16.dp)) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(text = "Izbrana Mesta", style = MaterialTheme.typography.titleLarge)
 
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Button(onClick = onGenerateMatrix) {
-                    Text("Generate Matrix")
-                }
-                Button(onClick = onCalculatePath) {
-                    Text("Calculate Path")
-                }
-            }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Izbrana Mesta",
+                style = MaterialTheme.typography.titleLarge
+            )
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Button(
+                onClick = onGenerateMatrix,
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .weight(1f)
+            ) {
+                Text("Generate Matrix")
+            }
+
+            Button(
+                onClick = onCalculatePath,
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .weight(1f)
+            ) {
+                Text("Calculate Path")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         if (selectedCities.isEmpty()) {
-            Text("Ni izbranih mest.")
+            Text(
+                text = "Ni izbranih mest.",
+                style = MaterialTheme.typography.bodyMedium
+            )
         } else {
             LazyColumn {
                 items(selectedCities) { city ->
@@ -58,6 +86,7 @@ fun SelectedCitiesScreen(
         }
     }
 }
+
 
 @Composable
 fun SelectedCityItem(city: City, count: String) {
@@ -71,17 +100,19 @@ fun SelectedCityItem(city: City, count: String) {
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = city.name, style = MaterialTheme.typography.titleMedium)
-                Text(text = city.address)
-                Text(text = city.locationDescription)
-                Text(text = "Latitude: ${city.latitude}")
-                Text(text = "Longitude: ${city.longitude}")
-                Text(text = "Lockers: ${city.numberOfLockers}")
-                Text(text = "PostCode: ${city.postOfficeCode}")
-                Text(text = "Count: $count")
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(text = city.address, style = MaterialTheme.typography.bodySmall)
+                Text(text = city.locationDescription, style = MaterialTheme.typography.bodySmall)
+                Text(text = "Latitude: ${city.latitude}", style = MaterialTheme.typography.bodySmall)
+                Text(text = "Longitude: ${city.longitude}", style = MaterialTheme.typography.bodySmall)
+                Text(text = "Lockers: ${city.numberOfLockers}", style = MaterialTheme.typography.bodySmall)
+                Text(text = "PostCode: ${city.postOfficeCode}", style = MaterialTheme.typography.bodySmall)
+                //Text(text = "Count: $count", style = MaterialTheme.typography.bodySmall)
             }
         }
     }
