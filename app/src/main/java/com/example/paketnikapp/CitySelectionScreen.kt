@@ -35,13 +35,12 @@ import com.example.paketnikapp.viewmodel.CitySelectionViewModel
 @Composable
 fun CitySelectionScreen(
     viewModel: CitySelectionViewModel,
-    onExport: () -> Unit // Export callback
+    onExport: () -> Unit
 ) {
     val cities by viewModel.cities.collectAsState()
     val selectedCities by viewModel.selectedCities.collectAsState()
     val singleSelectedCity by viewModel.singleSelectedCity.collectAsState()
 
-    // Determine the state of the "Select All" checkbox
     val allSelected = selectedCities.size == cities.size && cities.isNotEmpty()
 
     Column(
@@ -49,7 +48,6 @@ fun CitySelectionScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Multi-select section header with "Select All" and "Export" button
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth(),
@@ -74,7 +72,7 @@ fun CitySelectionScreen(
                 )
             }
 
-            // Export Button
+            // Export button
             Button(
                 onClick = onExport,
                 enabled = selectedCities.isNotEmpty(),
@@ -92,24 +90,24 @@ fun CitySelectionScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Multi-select city list
         MultiSelectCityList(
             cities = cities,
             selectedCities = selectedCities,
             onCityToggle = { viewModel.toggleCitySelection(it) }
         )
 
+        // Divider & single-select section
         Spacer(modifier = Modifier.height(24.dp))
         Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f))
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Single-select section
         Text(
             text = "Izberite eno mesto",
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(modifier = Modifier.height(8.dp))
+
         SingleSelectCityList(
             cities = cities,
             selectedCity = singleSelectedCity,
@@ -146,7 +144,7 @@ fun SingleSelectCityList(
         items(cities, key = { it.address }) { city ->
             CityItem(
                 city = city,
-                isSelected = selectedCity == city,
+                isSelected = (selectedCity == city),
                 onSelect = { onCitySelect(city) },
                 selectionType = SelectionType.RadioButton
             )

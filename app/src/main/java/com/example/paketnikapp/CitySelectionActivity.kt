@@ -49,14 +49,10 @@ class CitySelectionActivity : ComponentActivity() {
         }
     }
 
-    /**
-     * Function to export selected cities.
-     */
     private fun exportCities() {
         lifecycleScope.launch {
             try {
                 val selectedCities = viewModel.getSelectedCitiesList()
-
                 if (selectedCities.isEmpty()) {
                     Toast.makeText(
                         this@CitySelectionActivity,
