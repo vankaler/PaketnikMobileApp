@@ -1,5 +1,6 @@
 [
   {
+    "Indeks": "1",
     "Mesto": "Ajdovščina",
     "Naslov": "Goriška cesta 24",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -9,6 +10,7 @@
     "Longitude": "13.90302332872509"
   },
   {
+    "Indeks": "2",
     "Mesto": "Benedikt",
     "Naslov": "Čolnikov trg 9",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -18,6 +20,7 @@
     "Longitude": "15.89144185"
   },
   {
+    "Indeks": "3",
     "Mesto": "Bled",
     "Naslov": "Ljubljanska cesta 10",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -27,6 +30,7 @@
     "Longitude": "14.11116497328706"
   },
   {
+    "Indeks": "4",
     "Mesto": "Bohinjska Bistrica",
     "Naslov": "Trg svobode 2 C",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -36,6 +40,7 @@
     "Longitude": "13.9529801"
   },
   {
+    "Indeks": "5",
     "Mesto": "Borovnica",
     "Naslov": "Molkov trg 12",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -45,6 +50,7 @@
     "Longitude": "14.3650811"
   },
   {
+    "Indeks": "6",
     "Mesto": "Bresternica",
     "Naslov": "Obrobna ulica 1",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -54,6 +60,7 @@
     "Longitude": "15.578351777386072"
   },
   {
+    "Indeks": "7",
     "Mesto": "Brezovica pri Ljubljani",
     "Naslov": "Podpeška cesta 20",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -63,6 +70,7 @@
     "Longitude": "14.415704107227107"
   },
   {
+    "Indeks": "8",
     "Mesto": "Brežice",
     "Naslov": "Ulica stare pravde 34",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -72,6 +80,7 @@
     "Longitude": "15.593317664714808"
   },
   {
+    "Indeks": "9",
     "Mesto": "Celje",
     "Naslov": "Krekov trg 9",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -81,6 +90,7 @@
     "Longitude": "15.2674189"
   },
   {
+    "Indeks": "10",
     "Mesto": "Črenšovci",
     "Naslov": "Ulica Prekmurske čete 14",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -90,6 +100,7 @@
     "Longitude": "16.2935864"
   },
   {
+    "Indeks": "11",
     "Mesto": "Črna na Koroškem",
     "Naslov": "Center 16",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -99,8 +110,9 @@
     "Longitude": "14.8450257"
   },
   {
+    "Indeks": "12",
     "Mesto": "Črnomelj",
-    "Naslov": " Kolodvorska cesta 30 A",
+    "Naslov": "Kolodvorska cesta 30 A",
     "Opis lokacije": "Ob poštni poslovalnici",
     "Število paketnikov": 4,
     "Izročilna pošta": 8340,
@@ -108,6 +120,7 @@
     "Longitude": "15.19055235539216"
   },
   {
+    "Indeks": "13",
     "Mesto": "Dob",
     "Naslov": "Krtina 144",
     "Opis lokacije": "Bar Rožmarinka",
@@ -117,6 +130,7 @@
     "Longitude": "14.6492084"
   },
   {
+    "Indeks": "14",
     "Mesto": "Dobova",
     "Naslov": "Ulica bratov Gerjovičev 52",
     "Opis lokacije": "Ob nekdanji poštni poslovalnici",
@@ -126,8 +140,9 @@
     "Longitude": "15.6558561"
   },
   {
+    "Indeks": "15",
     "Mesto": "Dravograd",
-    "Naslov": "Trg 4. julija 1 ",
+    "Naslov": "Trg 4. julija 1",
     "Opis lokacije": "Ob poštni poslovalnici",
     "Število paketnikov": 4,
     "Izročilna pošta": 2370,
@@ -135,8 +150,9 @@
     "Longitude": "15.024135656716577"
   },
   {
+    "Indeks": "16",
     "Mesto": "Gorišnica",
-    "Naslov": "Gorišnica 79 ",
+    "Naslov": "Gorišnica 79",
     "Opis lokacije": "Ob poštni poslovalnici",
     "Število paketnikov": 2,
     "Izročilna pošta": 2272,
@@ -144,8 +160,9 @@
     "Longitude": "16.01267933493611"
   },
   {
+    "Indeks": "17",
     "Mesto": "Gornja Radgona",
-    "Naslov": "Cesta na Stadion 1 ",
+    "Naslov": "Cesta na Stadion 1",
     "Opis lokacije": "Ob poštni poslovalnici",
     "Število paketnikov": 4,
     "Izročilna pošta": 9250,
@@ -153,6 +170,7 @@
     "Longitude": "15.993826825728402"
   },
   {
+    "Indeks": "18",
     "Mesto": "Gornji Grad",
     "Naslov": "Podsmrečje 20",
     "Opis lokacije": "Mercator",
@@ -162,6 +180,7 @@
     "Longitude": "14.804586003479383"
   },
   {
+    "Indeks": "19",
     "Mesto": "Gornji Grad",
     "Naslov": "Attemsov trg 8",
     "Opis lokacije": "Poslovni objekt",
@@ -171,8 +190,9 @@
     "Longitude": "14.804809690165772"
   },
   {
+    "Indeks": "20",
     "Mesto": "Grosuplje",
-    "Naslov": "Partizanska cesta 7 ",
+    "Naslov": "Partizanska cesta 7",
     "Opis lokacije": "Ob poštni poslovalnici",
     "Število paketnikov": 6,
     "Izročilna pošta": 1290,
@@ -180,6 +200,7 @@
     "Longitude": "14.658029655931532"
   },
   {
+    "Indeks": "21",
     "Mesto": "Idrija",
     "Naslov": "Vodnikova ulica 1 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -189,6 +210,7 @@
     "Longitude": "14.0261357"
   },
   {
+    "Indeks": "22",
     "Mesto": "Ivančna Gorica",
     "Naslov": "Ploščad Osvobodilne fronte 4",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -198,6 +220,7 @@
     "Longitude": "14.805902"
   },
   {
+    "Indeks": "23",
     "Mesto": "Ivanjkovci",
     "Naslov": "Ivanjkovci 9 B",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -207,6 +230,7 @@
     "Longitude": "16.157242"
   },
   {
+    "Indeks": "24",
     "Mesto": "Izola/Isola",
     "Naslov": "Cankarjev drevored 1 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -216,6 +240,7 @@
     "Longitude": "13.660708513722671"
   },
   {
+    "Indeks": "25",
     "Mesto": "Jesenice",
     "Naslov": "Cesta Cirila Tavčarja 8 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -225,6 +250,7 @@
     "Longitude": "14.043120591089153"
   },
   {
+    "Indeks": "26",
     "Mesto": "Jesenice na Dolenjskem",
     "Naslov": "Jesenice 9 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -234,6 +260,7 @@
     "Longitude": "15.6544392"
   },
   {
+    "Indeks": "27",
     "Mesto": "Kamnica",
     "Naslov": "Cesta v Rošpoh 18 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -243,6 +270,7 @@
     "Longitude": "15.611973248989539"
   },
   {
+    "Indeks": "28",
     "Mesto": "Kamnik",
     "Naslov": "Ljubljanska cesta 14 A",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -252,6 +280,7 @@
     "Longitude": "14.597309629719202"
   },
   {
+    "Indeks": "29",
     "Mesto": "Kidričevo",
     "Naslov": "Kopališka ulica 2 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -261,6 +290,7 @@
     "Longitude": "15.797027729161648"
   },
   {
+    "Indeks": "30",
     "Mesto": "Kobilje",
     "Naslov": " Kobilje 30",
     "Opis lokacije": "Občina Kobilje",
@@ -270,6 +300,7 @@
     "Longitude": "16.392891439046974"
   },
   {
+    "Indeks": "31",
     "Mesto": "Kočevje",
     "Naslov": "Ljubljanska cesta 23 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -279,6 +310,7 @@
     "Longitude": "14.856475203008396"
   },
   {
+    "Indeks": "32",
     "Mesto": "Komenda",
     "Naslov": "Glavarjeva cesta 39 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -288,6 +320,7 @@
     "Longitude": "14.5417435"
   },
   {
+    "Indeks": "33",
     "Mesto": "Koper",
     "Naslov": "Kolodvorska cesta 9 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -297,6 +330,7 @@
     "Longitude": "13.7346561"
   },
   {
+    "Indeks": "34",
     "Mesto": "Kranj",
     "Naslov": "Dražgoška ulica 8 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -306,6 +340,7 @@
     "Longitude": "14.356533528222306"
   },
   {
+    "Indeks": "35",
     "Mesto": "Kranj",
     "Naslov": "Škofjeloška cesta 17",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -315,6 +350,7 @@
     "Longitude": "14.3462575"
   },
   {
+    "Indeks": "36",
     "Mesto": "Kranj",
     "Naslov": "Jezerska cesta 41 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -324,6 +360,7 @@
     "Longitude": "14.368912806512608"
   },
   {
+    "Indeks": "37",
     "Mesto": "Kranj",
     "Naslov": "Ulica Lojzeta Hrovata 2 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -333,6 +370,7 @@
     "Longitude": "14.365636344111017"
   },
   {
+    "Indeks": "38",
     "Mesto": "Kranjska Gora",
     "Naslov": "Borovška cesta 92 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -342,6 +380,7 @@
     "Longitude": "13.781880706615517"
   },
   {
+    "Indeks": "39",
     "Mesto": "Krško",
     "Naslov": "Trg Matije Gubca 1 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -351,6 +390,7 @@
     "Longitude": "15.494711023437496"
   },
   {
+    "Indeks": "40",
     "Mesto": "Lenart v Slovenskih goricah",
     "Naslov": "Partizanska cesta 3 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -360,6 +400,7 @@
     "Longitude": "15.830624155714286"
   },
   {
+    "Indeks": "41",
     "Mesto": "Lendava/Lendva",
     "Naslov": "Trg ljudske pravice 7 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -369,6 +410,7 @@
     "Longitude": "16.4549567"
   },
   {
+    "Indeks": "42",
     "Mesto": "Lesce",
     "Naslov": "Alpska cesta 37 B",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -378,6 +420,7 @@
     "Longitude": "14.158054620297769"
   },
   {
+    "Indeks": "43",
     "Mesto": "Ljubljana",
     "Naslov": "Poljanski nasip 30 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -387,6 +430,7 @@
     "Longitude": "14.514606710588236"
   },
   {
+    "Indeks": "44",
     "Mesto": "Ljubljana",
     "Naslov": "Pražakova ulica 3 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -396,6 +440,7 @@
     "Longitude": "14.506565"
   },
   {
+    "Indeks": "45",
     "Mesto": "Ljubljana",
     "Naslov": "Zaloška cesta 57 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -405,6 +450,7 @@
     "Longitude": "14.5346821"
   },
   {
+    "Indeks": "46",
     "Mesto": "Ljubljana",
     "Naslov": " Dunajska cesta 141 ",
     "Opis lokacije": "Gostilnica Vinka",
@@ -414,6 +460,7 @@
     "Longitude": "14.512318201016747"
   },
   {
+    "Indeks": "47",
     "Mesto": "Ljubljana",
     "Naslov": "Riharjeva ulica 38",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -423,6 +470,7 @@
     "Longitude": "14.499345429745071"
   },
   {
+    "Indeks": "48",
     "Mesto": "Ljubljana",
     "Naslov": "Vodnikova cesta 235 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -432,6 +480,7 @@
     "Longitude": "14.472417457509469"
   },
   {
+    "Indeks": "49",
     "Mesto": "Ljubljana",
     "Naslov": "Resljeva cesta 14 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -441,6 +490,7 @@
     "Longitude": "14.5110433"
   },
   {
+    "Indeks": "50",
     "Mesto": "Ljubljana",
     "Naslov": "Letališka cesta 12",
     "Opis lokacije": "1A Avto Letališka",
@@ -450,6 +500,7 @@
     "Longitude": "14.5723347"
   },
   {
+    "Indeks": "51",
     "Mesto": "Ljubljana",
     "Naslov": "Tacenska cesta 94",
     "Opis lokacije": "As Mlakar Tacen Lj. ",
@@ -459,6 +510,7 @@
     "Longitude": "14.462242300415888"
   },
   {
+    "Indeks": "52",
     "Mesto": "Ljubljana",
     "Naslov": "Hrvaška ulica 8",
     "Opis lokacije": "Center Desetka",
@@ -468,6 +520,7 @@
     "Longitude": "14.5450895"
   },
   {
+    "Indeks": "53",
     "Mesto": "Ljubljana",
     "Naslov": "Ob železnici 22",
     "Opis lokacije": "Direct4me HQ",
@@ -477,6 +530,7 @@
     "Longitude": "14.536373906057815"
   },
   {
+    "Indeks": "54",
     "Mesto": "Ljubljana",
     "Naslov": "Hranilniška ulica 1",
     "Opis lokacije": " Gostilna Raubar",
@@ -486,6 +540,7 @@
     "Longitude": "14.5066497"
   },
   {
+    "Indeks": "55",
     "Mesto": "Ljubljana",
     "Naslov": "Dunajska cesta 145",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -495,6 +550,7 @@
     "Longitude": "14.512562"
   },
   {
+    "Indeks": "56",
     "Mesto": "Ljubljana",
     "Naslov": "Litijska cesta 140",
     "Opis lokacije": "Hayat Market Litijska",
@@ -504,6 +560,7 @@
     "Longitude": "14.559579847403022"
   },
   {
+    "Indeks": "57",
     "Mesto": "Ljubljana",
     "Naslov": "Tehnološki park 22a",
     "Opis lokacije": "Tehnološki park Ljubljana",
@@ -513,6 +570,7 @@
     "Longitude": "14.459499681384102"
   },
   {
+    "Indeks": "58",
     "Mesto": "Ljubljana",
     "Naslov": " Tržaška cesta 89",
     "Opis lokacije": "Vulkanizerstvo Pečar Tržaška",
@@ -522,6 +580,7 @@
     "Longitude": "14.477398627588165"
   },
   {
+    "Indeks": "59",
     "Mesto": "Ljubljana",
     "Naslov": "Cesta dveh cesarjev 73",
     "Opis lokacije": "Petrol Barje - jug",
@@ -531,6 +590,7 @@
     "Longitude": "14.478465980464366"
   },
   {
+    "Indeks": "60",
     "Mesto": "Ljubljana",
     "Naslov": "Cesta dveh cesarjev 71",
     "Opis lokacije": "Petrol Barje - sever",
@@ -540,6 +600,7 @@
     "Longitude": "14.481889322437684"
   },
   {
+    "Indeks": "61",
     "Mesto": "Ljubljana - Črnuče",
     "Naslov": "Dunajska cesta 361 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -549,6 +610,7 @@
     "Longitude": "14.52960494545685"
   },
   {
+    "Indeks": "62",
     "Mesto": "Ljubljana - Polje",
     "Naslov": "Zadobrovška cesta 14 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -558,6 +620,7 @@
     "Longitude": "14.5842302"
   },
   {
+    "Indeks": "63",
     "Mesto": " Ljubljana - Šentvid",
     "Naslov": "Prušnikova ulica 2 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -567,6 +630,7 @@
     "Longitude": "14.47251937030968"
   },
   {
+    "Indeks": "64",
     "Mesto": "Makole",
     "Naslov": "Makole 37 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -576,6 +640,7 @@
     "Longitude": "15.666732200000004"
   },
   {
+    "Indeks": "65",
     "Mesto": "Malečnik",
     "Naslov": "Malečnik 56 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -585,6 +650,7 @@
     "Longitude": "15.693498305658114"
   },
   {
+    "Indeks": "66",
     "Mesto": "Maribor",
     "Naslov": "Istrska ulica 49 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -594,6 +660,7 @@
     "Longitude": "15.674328746700834"
   },
   {
+    "Indeks": "67",
     "Mesto": "Maribor",
     "Naslov": "Šarhova ulica 59 A",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -603,6 +670,7 @@
     "Longitude": "15.621242846934372"
   },
   {
+    "Indeks": "68",
     "Mesto": "Maribor",
     "Naslov": "Gosposvetska cesta 84",
     "Opis lokacije": " PC Meltal - parkirišče",
@@ -612,6 +680,7 @@
     "Longitude": "15.6291919"
   },
   {
+    "Indeks": "69",
     "Mesto": "Maribor",
     "Naslov": "Tyrševa ulica 23",
     "Opis lokacije": "Študentski domovi Maribor DOM 1",
@@ -621,6 +690,7 @@
     "Longitude": "15.64622315938883"
   },
   {
+    "Indeks": "70",
     "Mesto": "Maribor",
     "Naslov": "Gosposvetska cesta 83",
     "Opis lokacije": "Študentski domovi Maribor DOM 7",
@@ -630,6 +700,7 @@
     "Longitude": "15.62719090327619"
   },
   {
+    "Indeks": "71",
     "Mesto": "Mengeš",
     "Naslov": "Trdinov trg 8 A",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -639,6 +710,7 @@
     "Longitude": "14.56859"
   },
   {
+    "Indeks": "72",
     "Mesto": "Metlika",
     "Naslov": "Naselje Borisa Kidriča 2 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -648,6 +720,7 @@
     "Longitude": "15.316766349817636"
   },
   {
+    "Indeks": "73",
     "Mesto": "Mirna",
     "Naslov": "Cesta na Fužine 3 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -657,6 +730,7 @@
     "Longitude": "15.059982005303027"
   },
   {
+    "Indeks": "74",
     "Mesto": "Moravče",
     "Naslov": "Vegova ulica 1 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -666,6 +740,7 @@
     "Longitude": "14.744729142294661"
   },
   {
+    "Indeks": "75",
     "Mesto": "Mozirje",
     "Naslov": " Savinjska cesta 3",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -675,6 +750,7 @@
     "Longitude": "14.960221690183552"
   },
   {
+    "Indeks": "76",
     "Mesto": "Murska Sobota",
     "Naslov": "Trg Zmage 6",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -684,6 +760,7 @@
     "Longitude": "16.163772566342757"
   },
   {
+    "Indeks": "77",
     "Mesto": "Murska Sobota",
     "Naslov": "Ulica Štefana Kovača 43",
     "Opis lokacije": "Maximus Murska sobota",
@@ -693,6 +770,7 @@
     "Longitude": "16.14511390711948"
   },
   {
+    "Indeks": "78",
     "Mesto": "Muta",
     "Naslov": "Glavni trg 31 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -702,6 +780,7 @@
     "Longitude": "15.16335100090049"
   },
   {
+    "Indeks": "79",
     "Mesto": "Naklo",
     "Naslov": "Glavna cesta 24 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -711,6 +790,7 @@
     "Longitude": "14.31565657900617"
   },
   {
+    "Indeks": "80",
     "Mesto": "Nova Gorica",
     "Naslov": "Kidričeva ulica 19 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -720,6 +800,7 @@
     "Longitude": "13.648109008525948"
   },
   {
+    "Indeks": "81",
     "Mesto": "Nova Gorica",
     "Naslov": "Industrijska cesta 9",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -729,6 +810,7 @@
     "Longitude": "13.673390073580109"
   },
   {
+    "Indeks": "82",
     "Mesto": "Novo mesto",
     "Naslov": "Ulica Slavka Gruma 7",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -738,6 +820,7 @@
     "Longitude": "15.155495038006302"
   },
   {
+    "Indeks": "83",
     "Mesto": "Novo mesto",
     "Naslov": "Novi trg 7 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -747,6 +830,7 @@
     "Longitude": "15.1634608"
   },
   {
+    "Indeks": "84",
     "Mesto": "Ormož",
     "Naslov": "Poštna ulica 2 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -756,6 +840,7 @@
     "Longitude": "16.1487564"
   },
   {
+    "Indeks": "85",
     "Mesto": "Petrovci",
     "Naslov": "Gornji Petrovci 40 E",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -765,6 +850,7 @@
     "Longitude": "16.2176988"
   },
   {
+    "Indeks": "86",
     "Mesto": "Polzela",
     "Naslov": "Malteška cesta 38",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -774,6 +860,7 @@
     "Longitude": "15.076358475178754"
   },
   {
+    "Indeks": "87",
     "Mesto": "Postojna",
     "Naslov": "Ulica 1. maja 2 A",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -783,6 +870,7 @@
     "Longitude": "14.213825861786919"
   },
   {
+    "Indeks": "88",
     "Mesto": "Preddvor",
     "Naslov": "Šiška 1",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -792,6 +880,7 @@
     "Longitude": "14.4204322"
   },
   {
+    "Indeks": "89",
     "Mesto": "Prevalje",
     "Naslov": " Trg 32 A",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -801,6 +890,7 @@
     "Longitude": "14.9147584"
   },
   {
+    "Indeks": "90",
     "Mesto": "Ptuj",
     "Naslov": "Mariborska Cesta 19",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -810,6 +900,7 @@
     "Longitude": "15.859878667673367"
   },
   {
+    "Indeks": "91",
     "Mesto": "Rače",
     "Naslov": "Ljubljanska cesta 14 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -819,6 +910,7 @@
     "Longitude": "15.674746399999997"
   },
   {
+    "Indeks": "92",
     "Mesto": "Radenci",
     "Naslov": "Panonska cesta 5 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -828,6 +920,7 @@
     "Longitude": "16.0393224"
   },
   {
+    "Indeks": "93",
     "Mesto": " Ravne na Koroškem",
     "Naslov": "Trg svobode 19 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -837,6 +930,7 @@
     "Longitude": "14.966224735460482"
   },
   {
+    "Indeks": "94",
     "Mesto": "Ribnica",
     "Naslov": "Kolodvorska ulica 2 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -846,6 +940,7 @@
     "Longitude": "14.727240997933432"
   },
   {
+    "Indeks": "95",
     "Mesto": " Selnica ob Dravi",
     "Naslov": "Slovenski trg 4",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -855,6 +950,7 @@
     "Longitude": "15.49303763874046"
   },
   {
+    "Indeks": "96",
     "Mesto": "Sevnica",
     "Naslov": "Trg svobode 9",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -864,6 +960,7 @@
     "Longitude": "15.3029651"
   },
   {
+    "Indeks": "97",
     "Mesto": "Sežana",
     "Naslov": "Partizanska cesta 48 A",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -873,6 +970,7 @@
     "Longitude": "13.868569948911155"
   },
   {
+    "Indeks": "98",
     "Mesto": "Slovenj Gradec",
     "Naslov": "Kidričeva ulica 3a",
     "Opis lokacije": "Kivi Com Slovenj Gradec",
@@ -882,6 +980,7 @@
     "Longitude": "15.0795275"
   },
   {
+    "Indeks": "99",
     "Mesto": " Spodnji Duplek",
     "Naslov": "Cesta k Dravi 5",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -891,6 +990,7 @@
     "Longitude": "15.749888228411287"
   },
   {
+    "Indeks": "100",
     "Mesto": "Šempeter pri Gorici",
     "Naslov": "Vrtojbenska cesta 19 C",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -900,6 +1000,7 @@
     "Longitude": "13.640620099375269"
   },
   {
+    "Indeks": "101",
     "Mesto": "Šenčur",
     "Naslov": "Gasilska cesta 2 A",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -909,6 +1010,7 @@
     "Longitude": "14.41906129355868"
   },
   {
+    "Indeks": "102",
     "Mesto": "Šentjernej",
     "Naslov": "Prvomajska cesta 3",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -918,6 +1020,7 @@
     "Longitude": "15.340343937161345"
   },
   {
+    "Indeks": "103",
     "Mesto": "Šentjur",
     "Naslov": "Mestni trg 5a",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -927,6 +1030,7 @@
     "Longitude": "15.394653503487348"
   },
   {
+    "Indeks": "104",
     "Mesto": "Škofja Loka",
     "Naslov": "Kapucinski trg 14 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -936,6 +1040,7 @@
     "Longitude": "14.30586791705882"
   },
   {
+    "Indeks": "105",
     "Mesto": "Šmarje pri Jelšah",
     "Naslov": "Aškerčev trg 26 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -945,6 +1050,7 @@
     "Longitude": "15.518382299999999"
   },
   {
+    "Indeks": "106",
     "Mesto": "Tolmin",
     "Naslov": "Trg maršala Tita 10 C",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -954,6 +1060,7 @@
     "Longitude": "13.7350296"
   },
   {
+    "Indeks": "107",
     "Mesto": "Trbovlje",
     "Naslov": "Trg revolucije 27",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -963,6 +1070,7 @@
     "Longitude": "15.0419847"
   },
   {
+    "Indeks": "108",
     "Mesto": "Trbovlje",
     "Naslov": "Trg Franca Fakina 4 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -972,6 +1080,7 @@
     "Longitude": "15.053734016252388"
   },
   {
+    "Indeks": "109",
     "Mesto": "Trebnje",
     "Naslov": "Goliev trg 11 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -981,6 +1090,7 @@
     "Longitude": "15.007253645922892"
   },
   {
+    "Indeks": "110",
     "Mesto": "Tržič",
     "Naslov": " Predilniška cesta 10 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -990,6 +1100,7 @@
     "Longitude": "14.307066397293008"
   },
   {
+    "Indeks": "111",
     "Mesto": "Velenje",
     "Naslov": " Kidričeva cesta 2a ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -999,6 +1110,7 @@
     "Longitude": "15.118920435635957"
   },
   {
+    "Indeks": "112",
     "Mesto": "Vrhnika",
     "Naslov": "Poštna ulica 2",
     "Opis lokacije": "Kulturni center Vrhnika",
@@ -1008,6 +1120,7 @@
     "Longitude": "14.294725"
   },
   {
+    "Indeks": "113",
     "Mesto": "Vrhnika",
     "Naslov": "Tržaška cesta 32",
     "Opis lokacije": "Kulturni center Vrhnika",
@@ -1017,6 +1130,7 @@
     "Longitude": "14.2928066"
   },
   {
+    "Indeks": "114",
     "Mesto": "Zagorje ob Savi",
     "Naslov": "Cesta zmage 28",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -1026,6 +1140,7 @@
     "Longitude": "14.996442141104732"
   },
   {
+    "Indeks": "115",
     "Mesto": "Zgornja Polskava",
     "Naslov": "Mariborska ulica 26",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -1035,6 +1150,7 @@
     "Longitude": "15.618655473384699"
   },
   {
+    "Indeks": "116",
     "Mesto": "Žalec",
     "Naslov": "Ulica heroja Staneta 1 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -1044,6 +1160,7 @@
     "Longitude": "15.159894805550328"
   },
   {
+    "Indeks": "117",
     "Mesto": "Železniki",
     "Naslov": "Na Kresu 1",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -1053,6 +1170,7 @@
     "Longitude": "14.1675263"
   },
   {
+    "Indeks": "118",
     "Mesto": "Žiri",
     "Naslov": "Trg svobode 1 ",
     "Opis lokacije": "Ob poštni poslovalnici",
@@ -1062,6 +1180,7 @@
     "Longitude": "14.109884842155527"
   },
   {
+    "Indeks": "119",
     "Mesto": "Žirovnica",
     "Naslov": "Žirovnica 4",
     "Opis lokacije": "Ob poštni poslovalnici",

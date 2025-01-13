@@ -54,6 +54,15 @@ class CitySelectionViewModel(private val context: Context) : ViewModel() {
         }
     }
 
+    fun getByIndex(index: Int): City? {
+        _cities.value.forEach { city: City ->
+            if (city.index == index) {
+                return city
+            }
+        }
+        return null
+    }
+
     fun selectSingleCity(city: City) {
         _singleSelectedCity.value = if (_singleSelectedCity.value != city) city else null
     }

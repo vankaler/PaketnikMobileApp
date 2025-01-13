@@ -8,6 +8,9 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class City(
+    @SerialName("Indeks")
+    val index: Int,
+
     @SerialName("Mesto")
     val name: String,
 

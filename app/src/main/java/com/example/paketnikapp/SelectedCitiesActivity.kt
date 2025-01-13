@@ -4,18 +4,30 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.example.paketnikapp.model.City
+import com.example.paketnikapp.tsp.GA
+import com.example.paketnikapp.tsp.TSP
+import com.example.paketnikapp.tsp.TSP.Tour
+import com.example.paketnikapp.viewmodel.CitySelectionViewModel
+import com.example.paketnikapp.viewmodel.CitySelectionViewModelFactory
 
 class SelectedCitiesActivity : ComponentActivity() {
+
+    private val viewModel: CitySelectionViewModel by viewModels {
+        CitySelectionViewModelFactory(applicationContext)
+    }
+
 
     companion object {
         const val SELECTED_CITIES_KEY = "SELECTED_CITIES"
@@ -33,6 +45,7 @@ class SelectedCitiesActivity : ComponentActivity() {
 
         setContent {
             var calculatedPath by remember { mutableStateOf<List<Int>?>(null) }
+            val cities by viewModel.cities.collectAsState()
 
             Scaffold { paddingValues ->
                 Surface(
@@ -87,6 +100,21 @@ class SelectedCitiesActivity : ComponentActivity() {
                             Log.d(TAG, "Generate Matrix button tapped. Functionality is disabled for presentation.")
                         },
                         onCalculatePath = {
+
+                            var mappedCities = ArrayList<City>()
+
+                            var fileName: String = "distance_matrix.tsp"
+                            var tsp: TSP = TSP( this ,fileName, 10000)
+
+                            var ga: GA = GA(100, 0.8, 0.1)
+
+                            var tour: Tour = ga.execute(tsp)
+
+                            tour.path.forEach { city ->
+                                viewModel.getByIndex(city.index)?.let { cityByIndex ->
+                                    mappedCities.add(cityByIndex)
+                                }
+                            }
 
                             /*
                             // **Path Calculation Code - Disabled for Presentation**
