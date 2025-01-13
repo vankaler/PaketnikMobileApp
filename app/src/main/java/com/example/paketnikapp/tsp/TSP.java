@@ -2,6 +2,7 @@ package com.example.paketnikapp.tsp;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -114,6 +115,7 @@ public class TSP {
     public TSP(Context context, String path, int maxEvaluations) {
         this.context = context;
         loadData(path);
+        Log.d("TSP", "Loaded TSP data from " + path + " with " + numberOfCities + " cities.");
         numberOfEvaluations = 0;
         this.maxEvaluations = maxEvaluations;
     }

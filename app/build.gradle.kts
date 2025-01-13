@@ -69,6 +69,7 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-sync:5.1.0") {
         exclude(group = "org.mongodb", module = "bson-record-codec")
     }
+    implementation ("org.osmdroid:osmdroid-android:6.1.12") // Use the latest version
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")

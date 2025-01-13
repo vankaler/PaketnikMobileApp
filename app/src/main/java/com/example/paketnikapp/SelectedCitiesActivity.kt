@@ -1,7 +1,9 @@
 package com.example.paketnikapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -18,9 +20,12 @@ import androidx.compose.ui.Modifier
 import com.example.paketnikapp.model.City
 import com.example.paketnikapp.tsp.GA
 import com.example.paketnikapp.tsp.TSP
-import com.example.paketnikapp.tsp.TSP.Tour
 import com.example.paketnikapp.viewmodel.CitySelectionViewModel
 import com.example.paketnikapp.viewmodel.CitySelectionViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SelectedCitiesActivity : ComponentActivity() {
 
@@ -57,7 +62,6 @@ class SelectedCitiesActivity : ComponentActivity() {
                         selectedCities = cityList,
                         count = cityList.size.toString(),
                         onGenerateMatrix = {
-                            // **Functionality Disabled - Matrix Already Generated**
 
                             /*
                             // **Matrix Generation Code - Disabled for Presentation**
@@ -96,35 +100,10 @@ class SelectedCitiesActivity : ComponentActivity() {
                             }
                             */
 
-                            // **Alternative Action for Presentation**
                             Log.d(TAG, "Generate Matrix button tapped. Functionality is disabled for presentation.")
                         },
-                        onCalculatePath = {
-
-                            var mappedCities = ArrayList<City>()
-
-                            var fileName: String = "distance_matrix.tsp"
-                            var tsp: TSP = TSP( this ,fileName, 10000)
-
-                            var ga: GA = GA(100, 0.8, 0.1)
-
-                            var tour: Tour = ga.execute(tsp)
-
-                            tour.path.forEach { city ->
-                                viewModel.getByIndex(city.index)?.let { cityByIndex ->
-                                    mappedCities.add(cityByIndex)
-                                }
-                            }
-
-                            /*
-                            // **Path Calculation Code - Disabled for Presentation**
-                            launchPathCalculation(cityList) { path ->
-                                calculatedPath = path
-                            }
-                            */
-
-                            // **Alternative Action for Presentation**
-                            Log.d(TAG, "Calculate Path button tapped. Functionality is disabled as solver is removed.")
+                        onCalculatePath = { cr, pm, matrixType ->
+                            calculatePath(cr, pm, matrixType, selectedCities)
                         }
                     )
                 }
@@ -132,8 +111,65 @@ class SelectedCitiesActivity : ComponentActivity() {
         }
     }
 
+    private fun calculatePath(cr: Double, pm: Double, matrixType: String, selectedCities: List<City>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val matrixFileName = when (matrixType) {
+                    "Distance" -> "distance_matrix.tsp"
+                    "Time" -> "time_matrix.tsp"
+                    else -> {
+                        Log.e(TAG, "Invalid matrix type selected.")
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(
+                                this@SelectedCitiesActivity,
+                                "Invalid matrix type selected.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        return@launch
+                    }
+                }
 
-    /*
+                val ga = GA(100, cr, pm)
+
+                val tsp = TSP(this@SelectedCitiesActivity, matrixFileName, 10000)
+
+                val tour: TSP.Tour = ga.execute(tsp)
+
+                val mappedCities = ArrayList<City>()
+                tour.path.forEach { city ->
+                     viewModel.getByIndex(city.index)?.let { cityByIndex ->
+                         mappedCities.add(cityByIndex)
+                     }
+                }
+
+                withContext(Dispatchers.Main) {
+                    val intent = Intent(this@SelectedCitiesActivity, CityTourActivity::class.java).apply {
+                        putParcelableArrayListExtra(
+                            CityTourActivity.CITY_LIST_KEY,
+                            ArrayList(mappedCities)
+                        )
+                    }
+                    startActivity(intent)
+                    Toast.makeText(
+                        this@SelectedCitiesActivity,
+                        "Path calculated using $matrixType Matrix.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error in calculatePath", e)
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@SelectedCitiesActivity,
+                        "Failed to calculate path.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+/*
     private suspend fun fetchDistanceAndTimeMatrices(
         cities: List<City>,
         apiKey: String
@@ -151,7 +187,7 @@ class SelectedCitiesActivity : ComponentActivity() {
         val latLngs = cities.map { "${it.latitude},${it.longitude}" }
         Log.d(TAG, "Preparing to fetch for $N cities: $latLngs")
 
-        // We'll chunk by 10 to avoid exceeding the per-request limit.
+        // 10 chunksize zaradi limita
         val chunkSize = 10
         val chunks = latLngs.chunked(chunkSize)
         val client = OkHttpClient()
@@ -183,13 +219,12 @@ class SelectedCitiesActivity : ComponentActivity() {
 
                     if (code != 200) {
                         Log.e(TAG, "HTTP error code $code for chunk [$i, $j]. Skipping parsing.")
-                        continue // or throw an exception if you want to abort
+                        continue
                     }
 
                     val root = JSONObject(bodyString)
                     val rows = root.optJSONArray("rows") ?: continue
 
-                    // Use chunkSize for offsets, not 25.
                     val rowOffset = i * chunkSize
                     val colOffset = j * chunkSize
 
@@ -220,7 +255,6 @@ class SelectedCitiesActivity : ComponentActivity() {
                             val bigRow = rowOffset + k
                             val bigCol = colOffset + l
 
-                            // Make sure we don't go out of bounds just in case
                             if (bigRow in distanceMatrix.indices && bigCol in distanceMatrix.indices) {
                                 distanceMatrix[bigRow][bigCol] = distVal
                                 timeMatrix[bigRow][bigCol] = durVal
