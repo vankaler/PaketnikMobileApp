@@ -195,10 +195,9 @@ class CityTourActivity : ComponentActivity() {
 
 
     fun createNumberedDrawable(context: Context, number: Int): BitmapDrawable {
-        val size = 100
+        val size = 50
         val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-
         val paintCircle = Paint().apply {
             color = android.graphics.Color.RED
             isAntiAlias = true
@@ -208,7 +207,7 @@ class CityTourActivity : ComponentActivity() {
 
         val paintText = Paint().apply {
             color = android.graphics.Color.WHITE
-            textSize = 40f
+            textSize = 20f
             isAntiAlias = true
             textAlign = Paint.Align.CENTER
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)

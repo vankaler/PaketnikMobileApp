@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.lifecycleScope
 import com.example.paketnikapp.model.City
 import com.example.paketnikapp.tsp.GA
 import com.example.paketnikapp.tsp.TSP
@@ -26,6 +27,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.json.JSONObject
 
 class SelectedCitiesActivity : ComponentActivity() {
 
@@ -63,16 +67,20 @@ class SelectedCitiesActivity : ComponentActivity() {
                         count = cityList.size.toString(),
                         onGenerateMatrix = {
 
-                            /*
-                            // **Matrix Generation Code - Disabled for Presentation**
+
                             lifecycleScope.launch(Dispatchers.IO) {
                                 Log.d(TAG, "Generate Matrix button tapped.")
-
+                                val apiKeyString = "ZeGeneriranaMatrika"
+                                if (apiKeyString == "ZeGeneriranaMatrika"){
+                                    Log.e(TAG, "ze generirana matrika")
+                                    return@launch
+                                }
                                 try {
                                     val (distanceMatrix, timeMatrix) = fetchDistanceAndTimeMatrices(
                                         cities = cityList,
-                                        apiKey = "ZeGeneriranaMatrika"
+                                        apiKey = "apiKeyString"
                                     )
+
 
                                     val dirPath = filesDir.absolutePath
                                     Log.d(TAG, "Writing .tsp files to: $dirPath")
@@ -98,7 +106,7 @@ class SelectedCitiesActivity : ComponentActivity() {
                                     Log.e(TAG, "Error in onGenerateMatrix", e)
                                 }
                             }
-                            */
+
 
                             Log.d(TAG, "Generate Matrix button tapped. Functionality is disabled for presentation.")
                         },
@@ -169,7 +177,7 @@ class SelectedCitiesActivity : ComponentActivity() {
             }
         }
     }
-/*
+
     private suspend fun fetchDistanceAndTimeMatrices(
         cities: List<City>,
         apiKey: String
@@ -280,5 +288,5 @@ class SelectedCitiesActivity : ComponentActivity() {
         Log.d(TAG, "Completed chunk fetches.")
         return distanceMatrix to timeMatrix
     }
-    */
+
 }

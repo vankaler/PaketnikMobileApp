@@ -4,6 +4,7 @@ plugins {
     id("com.google.gms.google-services")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("kotlin-parcelize")
+    id("com.chaquo.python")
 }
 
 android {
@@ -20,6 +21,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+        ndk {
+            abiFilters += listOf("arm64-v8a", "x86")
         }
     }
 
@@ -69,6 +73,7 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-sync:5.1.0") {
         exclude(group = "org.mongodb", module = "bson-record-codec")
     }
+
     implementation ("org.osmdroid:osmdroid-android:6.1.12") // Use the latest version
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.appcompat:appcompat:1.7.0")
@@ -137,4 +142,13 @@ dependencies {
     androidTestImplementation ("androidx.test:rules:1.4.0")
     androidTestImplementation ("androidx.test:runner:1.4.0")
 
+/*
+python {
+    // Specifikacija različice Pythona
+    buildPython "C:/Python38/python.exe" // Uporabite pot do vaše Python namestitve
+    pip {
+        install "numpy"
+        install "Pillow"
+    }
+}*/
 }

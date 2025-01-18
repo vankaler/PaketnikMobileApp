@@ -156,6 +156,14 @@ fun displayProfile(level: Int, id: String) {
                     Text("Room")
                 }
             }
+            Spacer(modifier = Modifier.height(16.dp))
+            // Dodajte gumb za kompresijo slike
+            Button(onClick = {
+                val intent = Intent(context, CompressImageActivity::class.java)
+                context.startActivity(intent)
+            }, modifier = Modifier.fillMaxWidth()) {
+                Text("Kompresiraj Sliko")
+            }
         }
         3 -> {
             Button(onClick = { /*TODO*/ }) {
